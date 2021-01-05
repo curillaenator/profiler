@@ -1,0 +1,12 @@
+@import "../../../colors.scss";
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25%;
+  margin-right: 24px;
+  & > a {
+    text-decoration: none;
+  }
+}

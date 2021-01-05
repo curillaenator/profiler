@@ -1,0 +1,14 @@
+@import '../../../colors.scss';
+
+.envelope {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    background-color: $primary;
+    .title {
+        text-transform: uppercase;
+        color: $primaryText;
+    }
+}
