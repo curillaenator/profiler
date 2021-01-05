@@ -1,4 +1,5 @@
-import MenuCont from "./Menu/MenuCont";
+// import MenuCont from "./Aside/Menu/MenuCont";
+import Aside from "./Aside/Aside";
 import Body from "./Body/Body";
 
 import styles from "./content.module.scss";
@@ -6,7 +7,8 @@ import styles from "./content.module.scss";
 function Content() {
   return (
     <div className={styles.content}>
-      <MenuCont />
+      {/* <MenuCont /> */}
+      <Aside />
       <Body />
     </div>
   );

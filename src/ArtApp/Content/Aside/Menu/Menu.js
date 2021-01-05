@@ -1,18 +1,16 @@
-import { NavLink } from "react-router-dom";
-import ButtonUI from "../../UIComponents/ButtonUI/ButtonUI";
+import ButtonLink from "../../../UIComponents/ButtonUI/ButtonLink";
 
 import styles from "./menu.module.scss";
 
 function Menu(props) {
+  // console.log(props);
   const navButtons = Object.keys(props.buttons);
   const menuHeight = navButtons.length * 40 + 16 * (navButtons.length - 1);
-  console.log(menuHeight);
+  props.menuHeight(menuHeight);
   return (
     <div className={styles.menu} style={{ height: menuHeight }}>
       {navButtons.map((navBtn) => (
-        <NavLink to={navBtn} key={navBtn}>
-          <ButtonUI title={props.buttons[navBtn]} />
-        </NavLink>
+        <ButtonLink title={props.buttons[navBtn]} link={navBtn} key={navBtn} />
       ))}
     </div>
   );
