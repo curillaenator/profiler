@@ -7,7 +7,6 @@ import styles from "./content.module.scss";
 function Content() {
   return (
     <div className={styles.content}>
-      {/* <MenuCont /> */}
       <Aside />
       <Body />
     </div>

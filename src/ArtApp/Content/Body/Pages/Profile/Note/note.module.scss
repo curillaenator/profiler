@@ -1,0 +1,25 @@
+@import "../../../../../../colors.scss";
+
+.note {
+  background-color: $post;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  .title {
+      display: flex;
+      align-items: center;
+    & > h3 {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin: 0;
+      padding: 8px;
+    }
+    & > p {
+        font-size: 10px;
+    }
+  }
+  & > p {
+    margin: 0;
+    padding: 8px;
+  }
+}

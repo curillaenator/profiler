@@ -1,0 +1,41 @@
+@import "../../../../../../colors.scss";
+
+@mixin textarea {
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 8px;
+
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  line-height: 1.2;
+  color: $text;
+}
+
+.form {
+  background-color: $post;
+  margin-bottom: 16px;
+  padding: 8px;
+  border-radius: 8px;
+  .title {
+    @include textarea;
+    height: 36px;
+    resize: none;
+  }
+  .text {
+    @include textarea;
+    min-height: 54px;
+    max-height: 8rem;
+    resize: vertical;
+  }
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    .add {
+      width: 128px;
+    }
+  }
+}

@@ -14,6 +14,7 @@ const initialState = {
 };
 
 export const profileReducer = (state = initialState, action) => {
+  let st = { ...state, user: { ...state.user } };
   switch (action.type) {
     case "AGE-WORDER":
       let ager = action.age > 20 ? action.age % 10 : action.age;
@@ -31,13 +32,13 @@ export const profileReducer = (state = initialState, action) => {
           word = "лет";
           break;
       }
-      state.user.ageWord = word;
+      st.user.ageWord = word;
       break;
 
     default:
       break;
   }
-  return state;
+  return st;
 };
 
 export const actionAgeWorder = (age) => ({

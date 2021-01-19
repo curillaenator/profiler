@@ -1,6 +1,6 @@
 const initialState = {
   menuButtons: {
-    profile: "профиль",
+    user: "профиль",
     skills: "навыки",
     works: "мои работы",
     dialogs: "общение",

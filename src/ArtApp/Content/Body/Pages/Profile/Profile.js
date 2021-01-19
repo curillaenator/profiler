@@ -1,8 +1,10 @@
 import styles from "./profile.module.scss";
 
 function Profile(props) {
+  // console.log(props);
   const fullname = `${props.user.name} ${props.user.last}`;
-//   props.ageWorder(props.user.age);
+  // const fullage = props.user.age;
+  // props.ageWorder(fullage);
   return (
     <div className={styles.profile}>
       <div className={styles.image}>

@@ -1,0 +1,19 @@
+@import "../../../../../colors.scss";
+
+.posts {
+  .header {
+    margin-bottom: 16px;
+    border-radius: 8px;
+    .title {
+      font-weight: 800;
+      font-size: 16px;
+      text-transform: uppercase;
+      color: $text;
+      margin-left: 8px;
+      margin-bottom: 16px;
+    }
+  }
+  .track {
+  }
+}
+

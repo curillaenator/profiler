@@ -1,4 +1,4 @@
-import { ProfileCont } from  "./Pages/Profile/ProfileCont";
+import User from "./Pages/Profile/User";
 import Skills from "./Pages/Skils";
 import Works from "./Pages/Works";
 import Dialogs from "./Pages/Dialogs";
@@ -9,7 +9,7 @@ import styles from "./body.module.scss";
 function Body() {
   return (
     <div className={styles.body}>
-      <Route path="/profile" render={() => <ProfileCont />} />
+      <Route path="/user" render={() => <User />} />
       <Route path="/skills" render={() => <Skills />} />
       <Route path="/works" render={() => <Works />} />
       <Route path="/dialogs" render={() => <Dialogs />} />

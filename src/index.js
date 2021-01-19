@@ -7,19 +7,12 @@ import { store } from "./Redux/store";
 
 import "./index.scss";
 
-const renderApp = (state) => {
   ReactDOM.render(
     <React.StrictMode>
       <Provider store={store}>
-        <ArtApp state={state} />
+        <ArtApp />
       </Provider>
     </React.StrictMode>,
     document.getElementById("root")
   );
-};
-renderApp(store.getState());
 
-store.subscribe(() => {
-  let state = store.getState();
-  renderApp(state);
-});
