@@ -13,6 +13,30 @@
   .pad {
     display: flex;
     align-items: center;
-    // height: 40px;
+    .find {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      position: relative;
+      transition: 0.07s ease-in-out;
+      & > svg {
+        width: 16px;
+      }
+      & > p {
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: $secondaryText;
+        margin-left: 8px;
+      }
+      &:hover {
+        transform: scale(1.02);
+        filter: drop-shadow(2px 2px 2px $primaryShadow);
+      }
+      &:active {
+        transform: scale(1);
+        filter: none;
+      }
+    }
   }
 }

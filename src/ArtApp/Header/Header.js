@@ -1,9 +1,19 @@
-import styles from './header.module.scss'
+import { NavLink } from "react-router-dom";
 
-function Header() {
-  return <div className={styles.header}>
-    <div className={styles.pad}>ArtApp</div>
-    <div className={styles.pad}>Header</div>
-  </div>;
+import styles from "./header.module.scss";
+
+function Header(props) {
+  // console.log(props);
+  return (
+    <div className={styles.header}>
+      <div className={styles.pad}>ArtApp</div>
+      <div className={styles.pad}>
+        <NavLink to="findusers" className={styles.find}>
+          {props.search}
+          <p>Найти людей</p>
+        </NavLink>
+      </div>
+    </div>
+  );
 }
 export default Header;

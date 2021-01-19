@@ -1,7 +1,8 @@
 @import "../../../../../../colors.scss";
 
 .note {
-  background-color: $post;
+  // background-color: $post;
+  border: 2px solid $post;
   border-radius: 8px;
   margin-bottom: 16px;
   .title {
@@ -19,6 +20,7 @@
     }
   }
   & > p {
+    font-size: 14px;
     margin: 0;
     padding: 8px;
   }

@@ -1,27 +1,69 @@
 @import "../../../colors.scss";
 
-.envelope {
+@mixin envelope {
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 8px;
   width: 100%;
-  height: 40px;
   background-color: $primary;
   text-decoration: none;
-  cursor: pointer;
-  .title {
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: $primaryText;
-  }
+  transition: 0.07s ease-in-out;
+}
+@mixin title {
+  text-transform: uppercase;
+  color: $primaryText;
+}
+@mixin dyn {
   &:hover {
     background-color: $primaryHover;
   }
   &:active {
     background-color: $primary;
   }
+}
+@mixin dyn-sec {
+  &:hover {
+    background-color: $secondaryHover;
+  }
+  &:active {
+    background-color: $secondary;
+  }
+}
+
+.envelope {
+  @include envelope;
+  height: 40px;
+  cursor: pointer;
+  .title {
+    @include title;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  @include dyn;
+}
+.s_envelope {
+  @include envelope;
+  height: 20px;
+  cursor: pointer;
+  .s_title {
+    @include title;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  @include dyn;
+}
+.s_envelope_sec {
+  @include envelope;
+  background-color: $secondary;
+  height: 20px;
+  cursor: pointer;
+  .s_title {
+    @include title;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  @include dyn-sec;
 }
 .active {
   background-color: $primaryActive;

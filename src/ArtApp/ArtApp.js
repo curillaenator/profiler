@@ -1,13 +1,13 @@
 import { BrowserRouter } from "react-router-dom";
 
-import Header from "./Header/Header";
+import { HeaderCont } from "./Header/HeaderCont";
 import Content from "./Content/Content";
 
 function ArtApp(props) {
   return (
     <BrowserRouter>
       <div className="artapp">
-        <Header />
+        <HeaderCont />
         <Content />
       </div>
     </BrowserRouter>
