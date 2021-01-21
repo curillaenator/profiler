@@ -22,15 +22,6 @@
     background-color: $primary;
   }
 }
-@mixin dyn-sec {
-  &:hover {
-    background-color: $secondaryHover;
-  }
-  &:active {
-    background-color: $secondary;
-  }
-}
-
 .envelope {
   @include envelope;
   height: 40px;
@@ -63,7 +54,23 @@
     font-size: 10px;
     font-weight: 600;
   }
-  @include dyn-sec;
+  &:hover {
+    background-color: $secondaryHover;
+  }
+  &:active {
+    background-color: $secondary;
+  }
+}
+.s_envelope_act {
+  @include envelope;
+  background-color: $primaryActive;
+  height: 20px;
+  cursor: pointer;
+  .s_title {
+    @include title;
+    font-size: 10px;
+    font-weight: 600;
+  }
 }
 .active {
   background-color: $primaryActive;
