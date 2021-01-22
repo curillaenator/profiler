@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 import SButtonUI from "../../../../UIComponents/ButtonUI/sButtonUI";
 import styles from "./findusers.module.scss";
 import nullava from "../../../../../assets/images/nullAva.jpg";
@@ -12,12 +14,16 @@ const Usercard = (props) => {
   return (
     <div className={styles.usercard}>
       <div className={styles.ava}>
-        <img
-          src={
-            props.user.photos.small === null ? nullava : props.user.photos.small
-          }
-          alt=""
-        />
+        <NavLink to={`/profile/${props.user.id}`} className={styles.navlink}>
+          <img
+            src={
+              props.user.photos.small === null
+                ? nullava
+                : props.user.photos.small
+            }
+            alt="Avatar"
+          />
+        </NavLink>
         <div className={styles.sbutton}>
           {props.user.followed ? (
             <SButtonUI title="отписка" type={"secondary"} handler={handler} />

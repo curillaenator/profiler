@@ -35,6 +35,7 @@ const initialState = {
   pagesize: 12,
   totalusers: 0,
   currentpage: 1,
+  isFetching: false,
 };
 
 export const findusersReducer = (state = initialState, action) => {
@@ -65,6 +66,8 @@ export const findusersReducer = (state = initialState, action) => {
       return { ...state, users: [...action.users] };
     case "SET-CURRENTPAGE":
       return { ...state, currentpage: action.page };
+    case "IS-FETCHING":
+      return { ...state, isFetching: action.fetch };
     default:
       return state;
   }
@@ -75,3 +78,4 @@ export const unfollow = (id) => ({ type: "UNFOLLOW", id });
 export const setUsers = (users) => ({ type: "SET-USERS", users });
 export const setTotalUsers = (total) => ({ type: "SET-TOTALUSERS", total });
 export const setCurrentPage = (page) => ({ type: "SET-CURRENTPAGE", page });
+export const fetching = (fetch) => ({ type: "IS-FETCHING", fetch });
