@@ -1,14 +1,11 @@
 import { connect } from "react-redux";
 import Menu from "./Menu";
 
-import { actionMenuHeight } from "../../../../Redux/Reducers/uiReducer";
+import { menuHeight } from "../../../../Redux/Reducers/uiReducer";
 
 const mapStateToProps = (state) => ({
   buttons: state.ui.menuButtons,
 });
-const mapDispatchToProps = (dispatch) => ({
-  menuHeight: (height) => dispatch(actionMenuHeight(height)),
-});
 
-const MenuCont = connect(mapStateToProps, mapDispatchToProps)(Menu);
+const MenuCont = connect(mapStateToProps, { menuHeight })(Menu);
 export default MenuCont;

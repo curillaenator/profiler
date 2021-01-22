@@ -41,19 +41,17 @@ class FindusersAJAX extends React.Component {
   render() {
     // console.log(this.props);
     return (
-      <>
-        <Findusers
-          isFetching={this.props.isFetching}
-          currentpage={this.props.currentpage}
-          follow={this.props.follow}
-          unfollow={this.props.unfollow}
-          icons={this.props.icons}
-          pagesize={this.props.pagesize}
-          totalusers={this.props.totalusers}
-          users={this.props.users}
-          pageHandler={this.pageHandler}
-        />
-      </>
+      <Findusers
+        isFetching={this.props.isFetching}
+        currentpage={this.props.currentpage}
+        follow={this.props.follow}
+        unfollow={this.props.unfollow}
+        icons={this.props.icons}
+        pagesize={this.props.pagesize}
+        totalusers={this.props.totalusers}
+        users={this.props.users}
+        pageHandler={this.pageHandler}
+      />
     );
   }
 }

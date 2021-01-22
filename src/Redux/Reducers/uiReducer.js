@@ -57,8 +57,10 @@ const initialState = {
 export const uiReducer = (state = initialState, action) => {
   switch (action.type) {
     case "MENU-HEIGHT":
-      state.menuParams.height = action.height;
-      break;
+      return {
+        ...state,
+        menuParams: { ...state.menuParams, height: action.height },
+      };
 
     default:
       break;
@@ -66,7 +68,4 @@ export const uiReducer = (state = initialState, action) => {
   return state;
 };
 
-export const actionMenuHeight = (height) => ({
-  type: "MENU-HEIGHT",
-  height: height,
-});
+export const menuHeight = (height) => ({ type: "MENU-HEIGHT", height });

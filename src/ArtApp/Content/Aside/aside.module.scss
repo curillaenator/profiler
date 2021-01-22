@@ -1,6 +1,7 @@
 @import "../../../colors.scss";
 
 .aside {
-  width: 25%;
+  width: 220px;
   margin-right: 24px;
+  flex-shrink: 0;
 }
