@@ -8,10 +8,13 @@ function Header(props) {
     <div className={styles.header}>
       <div className={styles.pad}>ArtApp</div>
       <div className={styles.pad}>
-        <NavLink to="findusers" className={styles.find}>
+        <NavLink to="/findusers" className={styles.find}>
           {props.search}
           <p>Найти людей</p>
         </NavLink>
+        <div className={styles.authinfo}>
+          {props.isAuth ? props.login : "войти"}
+        </div>
       </div>
     </div>
   );

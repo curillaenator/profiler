@@ -5,7 +5,7 @@ import styles from "./buttonUI.module.scss";
 function ButtonUI(props) {
   return (
     <NavLink
-      to={props.link}
+      to={`/${props.link}`}
       className={styles.envelope}
       activeClassName={styles.active}
     >

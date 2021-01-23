@@ -11,11 +11,10 @@ const Usercard = (props) => {
       ? props.unfollow(props.user.id)
       : props.follow(props.user.id);
   };
-  const url = `/profile/user${props.user.id}`;
   return (
     <div className={styles.usercard}>
       <div className={styles.ava}>
-        <NavLink to={url} className={styles.navlink}>
+        <NavLink to={`/profile/${props.user.id}`} className={styles.navlink}>
           <img
             src={
               props.user.photos.small === null

@@ -31,16 +31,35 @@
         margin-bottom: 8px;
       }
       .job {
-          font-size: 14px;
-          margin-bottom: 8px;
-      }
-      .age {
         font-size: 14px;
+        margin-bottom: 8px;
+      }
+      .socials {
+        display: flex;
+        align-items: center;
+        .uploaded {
+          margin-right: 4px;
+          & > svg {
+            width: 24px;
+            fill: $primary;
+            &:hover {
+              fill: $primaryHover;
+            }
+            &:active {
+              fill: $primaryActive;
+            }
+          }
+        }
+        .disabled {
+          margin-right: 4px;
+          & > svg {
+            fill: $secondary;
+          }
+        }
       }
     }
     .buttons {
       width: 24px;
-      // background-color: yellowgreen;
     }
   }
 }

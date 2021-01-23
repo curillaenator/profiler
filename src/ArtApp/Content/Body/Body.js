@@ -10,7 +10,7 @@ import styles from "./body.module.scss";
 function Body() {
   return (
     <div className={styles.body}>
-      <Route path="/profile" render={() => <User />} />
+      <Route path="/profile/:userId?" component={User} />
       <Route path="/skills" render={() => <Skills />} />
       <Route path="/works" render={() => <Works />} />
       <Route path="/dialogs" render={() => <Dialogs />} />

@@ -4,10 +4,16 @@ import nullava from "../../../../../assets/images/nullAva.jpg";
 import styles from "./profile.module.scss";
 
 function Profile(props) {
-  // console.log(!props.user);
+  // console.log(props);
   if (!props.user) {
     return <Loader />;
   }
+  const socials = props.socials.map((el) => ({
+    name: el,
+    link: props.user.contacts[el],
+    ico: props.icons[el],
+  }));
+
   const mainpic =
     "https://d16yj43vx3i1f6.cloudfront.net/uploads/2019/12/main_0000_Vietnam_1200-1088x529.jpg";
   return (
@@ -32,8 +38,23 @@ function Profile(props) {
         </div>
         <div className={styles.metrics}>
           <div className={styles.name}>{props.user.fullName}</div>
+
           <div className={styles.job}>
-            {props.user.lookingForAJobDescription}
+            {props.user.lookingForAJobDescription === null
+              ? "Фронтэнд разработчик"
+              : props.user.lookingForAJobDescription}
+          </div>
+
+          <div className={styles.socials}>
+            {socials.map((s) => (
+              <a
+                href={s.link}
+                key={s.name}
+                className={s.link === null ? styles.disabled : styles.uploaded}
+              >
+                {s.ico}
+              </a>
+            ))}
           </div>
         </div>
         <div className={styles.buttons}></div>

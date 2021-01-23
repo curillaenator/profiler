@@ -1,5 +1,6 @@
 const initialState = {
   user: null,
+  socials: ["github", "facebook", "vk", "instagram", "youtube"],
 };
 
 export const profileReducer = (state = initialState, action) => {
