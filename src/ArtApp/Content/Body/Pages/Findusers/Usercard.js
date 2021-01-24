@@ -2,15 +2,16 @@ import { NavLink } from "react-router-dom";
 
 import SButtonUI from "../../../../UIComponents/ButtonUI/sButtonUI";
 import styles from "./findusers.module.scss";
-import nullava from "../../../../../assets/images/nullAva.jpg";
+import nullAva from "../../../../../assets/images/nullAva.jpg";
 
 const Usercard = (props) => {
   // console.log(props);
-  const handler = () => {
+
+  const followHandler = () =>
     props.user.followed
-      ? props.unfollow(props.user.id)
-      : props.follow(props.user.id);
-  };
+      ? props.unfollower(props.user.id)
+      : props.follower(props.user.id);
+
   return (
     <div className={styles.usercard}>
       <div className={styles.ava}>
@@ -18,7 +19,7 @@ const Usercard = (props) => {
           <img
             src={
               props.user.photos.small === null
-                ? nullava
+                ? nullAva
                 : props.user.photos.small
             }
             alt="Avatar"
@@ -26,9 +27,19 @@ const Usercard = (props) => {
         </NavLink>
         <div className={styles.sbutton}>
           {props.user.followed ? (
-            <SButtonUI title="отписка" type={"secondary"} handler={handler} />
+            <SButtonUI
+              disabled={props.whileFollow.some((id) => id === props.user.id)}
+              title="отписка"
+              type={"secondary"}
+              handler={followHandler}
+            />
           ) : (
-            <SButtonUI title="в друзья" type={"primary"} handler={handler} />
+            <SButtonUI
+              disabled={props.whileFollow.some((id) => id === props.user.id)}
+              title="в друзья"
+              type={"primary"}
+              handler={followHandler}
+            />
           )}
         </div>
       </div>

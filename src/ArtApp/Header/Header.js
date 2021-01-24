@@ -1,5 +1,7 @@
 import { NavLink } from "react-router-dom";
 
+import nullAva from "../../assets/images/nullAva.jpg";
+
 import styles from "./header.module.scss";
 
 function Header(props) {
@@ -12,8 +14,15 @@ function Header(props) {
           {props.search}
           <p>Найти людей</p>
         </NavLink>
-        <div className={styles.authinfo}>
-          {props.isAuth ? props.login : "войти"}
+        <div className={props.isAuth ? styles.ava : styles.auth}>
+          {props.isAuth ? (
+            <img
+              src={props.ava === null ? nullAva : props.ava}
+              alt={props.login}
+            />
+          ) : (
+            "войти"
+          )}
         </div>
       </div>
     </div>

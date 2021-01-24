@@ -6,11 +6,30 @@
   align-items: center;
   border-radius: 8px;
   width: 100%;
+  height: 20px;
   background-color: $primary;
+  outline: none;
+  border: none;
   text-decoration: none;
   transition: 0.07s ease-in-out;
+
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: $primaryText;
+
+  cursor: pointer;
 }
 @mixin title {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: $primaryText;
+}
+@mixin sTitle {
+  font-size: 10px;
+  font-weight: 600;
   text-transform: uppercase;
   color: $primaryText;
 }
@@ -25,35 +44,20 @@
 .envelope {
   @include envelope;
   height: 40px;
-  cursor: pointer;
   .title {
     @include title;
-    font-size: 12px;
-    font-weight: 600;
   }
   @include dyn;
 }
 .s_envelope {
   @include envelope;
-  height: 20px;
-  cursor: pointer;
-  .s_title {
-    @include title;
-    font-size: 10px;
-    font-weight: 600;
-  }
+  @include sTitle;
   @include dyn;
 }
 .s_envelope_sec {
   @include envelope;
+  @include sTitle;
   background-color: $secondary;
-  height: 20px;
-  cursor: pointer;
-  .s_title {
-    @include title;
-    font-size: 10px;
-    font-weight: 600;
-  }
   &:hover {
     background-color: $secondaryHover;
   }
@@ -63,14 +67,16 @@
 }
 .s_envelope_act {
   @include envelope;
+  @include sTitle;
   background-color: $primaryActive;
-  height: 20px;
-  cursor: pointer;
-  .s_title {
-    @include title;
-    font-size: 10px;
-    font-weight: 600;
-  }
+}
+.s_envelope_dis {
+  @include envelope;
+  @include sTitle;
+  background-color: $primaryText;
+  border: 2px solid $secondary;
+  color: $secondary;
+  cursor: default;
 }
 .active {
   background-color: $primaryActive;

@@ -1,51 +1,29 @@
 import React from "react";
-import * as axios from "axios";
 import { connect } from "react-redux";
 
 import Findusers from "./Findusers";
 
 import {
-  follow,
-  unfollow,
-  setUsers,
-  setTotalUsers,
-  setCurrentPage,
-  fetching,
+  getUsers,
+  follower,
+  unfollower,
 } from "../../../../../Redux/Reducers/findusersReducer";
 
 class FindusersAJAX extends React.Component {
   componentDidMount() {
-    this.props.fetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentpage}&count=${this.props.pagesize}`
-      )
-      .then((response) => {
-        this.props.setTotalUsers(response.data.totalCount);
-        this.props.setUsers(response.data.items);
-        this.props.fetching(false);
-      });
+    this.props.getUsers(this.props.currentpage, this.props.pagesize);
   }
-  pageHandler = (pageNum) => {
-    this.props.fetching(true);
-    this.props.setCurrentPage(pageNum);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNum}&count=${this.props.pagesize}`
-      )
-      .then((response) => {
-        this.props.setUsers(response.data.items);
-        this.props.fetching(false);
-      });
-  };
+  pageHandler = (pageNum) => this.props.getUsers(pageNum, this.props.pagesize);
+
   render() {
     // console.log(this.props);
     return (
       <Findusers
         isFetching={this.props.isFetching}
         currentpage={this.props.currentpage}
-        follow={this.props.follow}
-        unfollow={this.props.unfollow}
+        follower={this.props.follower}
+        unfollower={this.props.unfollower}
+        whileFollow={this.props.whileFollow}
         icons={this.props.icons}
         pagesize={this.props.pagesize}
         totalusers={this.props.totalusers}
@@ -63,13 +41,11 @@ const mapStateToProps = (state) => ({
   pagesize: state.findusers.pagesize,
   currentpage: state.findusers.currentpage,
   isFetching: state.findusers.isFetching,
+  whileFollow: state.findusers.whileFollow,
 });
 
 export const FindusersCont = connect(mapStateToProps, {
-  follow,
-  unfollow,
-  setTotalUsers,
-  setUsers,
-  setCurrentPage,
-  fetching,
+  getUsers,
+  follower,
+  unfollower
 })(FindusersAJAX);

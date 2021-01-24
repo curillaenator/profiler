@@ -45,8 +45,9 @@ function Findusers(props) {
             user={u}
             key={u.id}
             icons={props.icons}
-            follow={props.follow}
-            unfollow={props.unfollow}
+            follower={props.follower}
+            unfollower={props.unfollower}
+            whileFollow={props.whileFollow}
           />
         ))}
       </div>

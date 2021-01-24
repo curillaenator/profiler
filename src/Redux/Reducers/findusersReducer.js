@@ -1,34 +1,4 @@
-// const usersexample = [
-//   {
-//     id: 0,
-//     follow: true,
-//     ava:
-//       "https://sun9-61.userapi.com/impf/c851024/v851024788/1a3136/v0hgAY-zwus.jpg?size=2560x1707&quality=96&proxy=1&sign=8af9bf8f3c60407321cf9f8e62c657a5&type=album",
-//     name: "Кирилл",
-//     lastname: "Art",
-//     job: "Фронтэнд разработчик",
-//     location: { country: "Россия", city: "Москва" },
-//   },
-//   {
-//     id: 1,
-//     follow: true,
-//     ava:
-//       "https://sun9-30.userapi.com/impf/c630117/v630117750/1c46/D6wZxvlloyw.jpg?size=1440x2160&quality=96&proxy=1&sign=ce21167328ad198bcd15e27dc2ce0c49&type=album",
-//     name: "Андрей",
-//     lastname: "DustyART",
-//     job: "UI/UX Дизайнер",
-//     location: { country: "Россия", city: "Москва" },
-//   },
-//   {
-//     id: 2,
-//     follow: false,
-//     ava: "https://sun9-34.userapi.com/c855432/v855432593/b3569/B1cF9mI6h-g.jpg",
-//     name: "Крипота",
-//     lastname: "Криповнишна",
-//     job: "Ужасонаводитель",
-//     location: { country: "Темень", city: "Мрачный" },
-//   },
-// ];
+import { usersAPI } from "../../API/api";
 
 const initialState = {
   users: [],
@@ -36,6 +6,7 @@ const initialState = {
   totalusers: 0,
   currentpage: 1,
   isFetching: false,
+  whileFollow: [],
 };
 
 export const findusersReducer = (state = initialState, action) => {
@@ -60,6 +31,13 @@ export const findusersReducer = (state = initialState, action) => {
           return u;
         }),
       };
+    case "WHILE-FOLLOW":
+      return {
+        ...state,
+        whileFollow: action.bool
+          ? [...state.whileFollow, action.id]
+          : state.whileFollow.filter((id) => id !== action.id),
+      };
     case "SET-TOTALUSERS":
       return { ...state, totalusers: action.total };
     case "SET-USERS":
@@ -73,9 +51,39 @@ export const findusersReducer = (state = initialState, action) => {
   }
 };
 
+// ACTIONS
+
 export const follow = (id) => ({ type: "FOLLOW", id });
 export const unfollow = (id) => ({ type: "UNFOLLOW", id });
+export const whileFollow = (id, bool) => ({ type: "WHILE-FOLLOW", id, bool });
 export const setUsers = (users) => ({ type: "SET-USERS", users });
 export const setTotalUsers = (total) => ({ type: "SET-TOTALUSERS", total });
 export const setCurrentPage = (page) => ({ type: "SET-CURRENTPAGE", page });
 export const fetching = (fetch) => ({ type: "IS-FETCHING", fetch });
+
+// THUNKS
+
+export const getUsers = (page, pagesize) => (dispatch) => {
+  dispatch(fetching(true));
+  dispatch(setCurrentPage(page));
+  usersAPI.getUsers(page, pagesize).then((data) => {
+    dispatch(setTotalUsers(data.totalCount));
+    dispatch(setUsers(data.items));
+    dispatch(fetching(false));
+  });
+};
+
+export const follower = (id) => (dispatch) => {
+  dispatch(whileFollow(id, true));
+  usersAPI.follow(id).then((data) => {
+    if (data.resultCode === 0) dispatch(follow(id));
+    dispatch(whileFollow(id, false));
+  });
+};
+export const unfollower = (id) => (dispatch) => {
+  dispatch(whileFollow(id, true));
+  usersAPI.unfollow(id).then((data) => {
+    if (data.resultCode === 0) dispatch(unfollow(id));
+    dispatch(whileFollow(id, false));
+  });
+};
