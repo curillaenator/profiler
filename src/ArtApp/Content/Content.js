@@ -4,7 +4,7 @@ import Body from "./Body/Body";
 
 import styles from "./content.module.scss";
 
-function Content() {
+function Content(props) {
   return (
     <div className={styles.content}>
       <Aside />

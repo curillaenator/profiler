@@ -1,3 +1,5 @@
+import { profileAPI } from "../../API/api";
+
 const initialState = {
   user: null,
   socials: ["github", "facebook", "vk", "instagram", "youtube"],
@@ -13,4 +15,12 @@ export const profileReducer = (state = initialState, action) => {
   }
 };
 
-export const setUser = (user) => ({ type: "SET-USER", user });
+// ACTIONS
+
+const setUser = (user) => ({ type: "SET-USER", user });
+
+// THUNKS
+
+export const setProfile = (userId) => (dispatch) => {
+  profileAPI.setProfile(userId).then((r) => dispatch(setUser(r)));
+};

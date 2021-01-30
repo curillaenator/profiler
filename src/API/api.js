@@ -7,13 +7,18 @@ const base = axios.create({
 });
 
 export const usersAPI = {
-  getUsers: (p, pSize) =>
-    base.get(`users?page=${p}&count=${pSize}`).then((r) => r.data),
+  getUsers: (page, pageSize) =>
+    base.get(`users?page=${page}&count=${pageSize}`).then((r) => r.data),
   follow: (id) => base.post(`follow/${id}`).then((r) => r.data),
   unfollow: (id) => base.delete(`follow/${id}`).then((r) => r.data),
 };
 
-export const headerAPI = {
+export const authAPI = {
   isAuth: () => base.get("auth/me").then((r) => r.data),
   getAva: (id) => base.get(`profile/${id}`).then((r) => r.data.photos.small),
+};
+
+export const profileAPI = {
+  setProfile: (userId) =>
+    base.get(`profile/${userId}`).then((r) => r.data),
 };

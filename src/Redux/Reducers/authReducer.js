@@ -1,4 +1,4 @@
-import { headerAPI } from "../../API/api";
+import { authAPI } from "../../API/api";
 
 const initialState = {
   id: null,
@@ -21,16 +21,16 @@ export const authReducer = (state = initialState, action) => {
 
 // ACTIONS
 
-export const userData = (userData) => ({ type: "USER-DATA", userData });
-export const userAva = (ava) => ({ type: "USER-DATA-AVA", ava });
+const userData = (userData) => ({ type: "USER-DATA", userData });
+const userAva = (ava) => ({ type: "USER-DATA-AVA", ava });
 
 // THUNKS
 
 export const getUserInfo = () => (dispatch) => {
-  headerAPI.isAuth().then((r1) => {
+  authAPI.isAuth().then((r1) => {
     if (r1.resultCode === 0) {
       dispatch(userData(r1.data));
-      headerAPI.getAva(r1.data.id).then((r2) => dispatch(userAva(r2)));
+      authAPI.getAva(r1.data.id).then((r2) => dispatch(userAva(r2)));
     }
   });
 };
