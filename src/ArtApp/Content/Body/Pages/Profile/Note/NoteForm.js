@@ -1,38 +1,33 @@
 import React from "react";
+import { Field } from "react-final-form";
 import ButtonUI from "../../../../../UIComponents/ButtonUI/ButtonUI";
 import styles from "./noteForm.module.scss";
 
 function NoteForm(props) {
-  let title = React.createRef();
-  let text = React.createRef();
-
-  const titleHandler = () => {
-    let noteTitle = title.current.value;
-    props.handleTitle(noteTitle);
-  };
-  const textHandler = () => {
-    let noteText = text.current.value;
-    props.handleText(noteText);
-  };
-  const buttonHandler = () => props.createNote();
+  const addDisabled =
+    !props.values.title || !props.values.text || props.submitting;
 
   return (
-    <form className={styles.form}>
-      <textarea
-        className={styles.title}
-        onInput={titleHandler}
-        ref={title}
-        value={props.valueTitle}
-      ></textarea>
-      <textarea
-        className={styles.text}
-        onInput={textHandler}
-        ref={text}
-        value={props.valueText}
-      ></textarea>
+    <form className={styles.form} onSubmit={props.handleSubmit}>
+      <div className={styles.title}>
+        <Field name="title" placeholder="Тайтл" component="textarea" />
+      </div>
+
+      <div className={styles.text}>
+        <Field name="text" placeholder="Текст" component="textarea" />
+      </div>
+
       <div className={styles.buttons}>
+        <div className={styles.clear}>
+          <ButtonUI
+            title="Очистить"
+            type="secondary"
+            disabled={props.pristine || props.submitting}
+            handler={props.form.reset}
+          />
+        </div>
         <div className={styles.add}>
-          <ButtonUI title="Добавить" handler={buttonHandler} />
+          <ButtonUI title="Добавить" disabled={addDisabled} />
         </div>
       </div>
     </form>

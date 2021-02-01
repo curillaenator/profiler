@@ -1,9 +1,19 @@
 @import "../../../../../../colors.scss";
 
 .status {
+  display: flex;
+  align-items: center;
   .string {
     font-size: 14px;
+    height: 19px;
   }
   .input {
+    font-family: "Montserrat", serif;
+    font-size: 14px;
+    height: 19px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid $post;
+    outline: none;
   }
 }

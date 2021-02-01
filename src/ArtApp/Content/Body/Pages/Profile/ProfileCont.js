@@ -16,8 +16,7 @@ class ProfileAJAX extends React.Component {
     // console.log(this.props);
     let userId = !this.props.match.params.userId
       ? "14217"
-      : // "2"
-        this.props.match.params.userId;
+      : this.props.match.params.userId;
 
     this.props.getProfile(userId);
     this.props.getStatus(userId);

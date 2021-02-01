@@ -18,8 +18,8 @@ class Status extends React.Component {
 
   onStatusChange = (e) => this.setState({ status: e.target.value });
 
-  componentDidUpdate(prevP, prevS) {
-    if (prevP.status !== this.props.status) {
+  componentDidUpdate(prevProps, prevS) {
+    if (prevProps.status !== this.props.status) {
       this.setState({ status: this.props.status });
     }
   }

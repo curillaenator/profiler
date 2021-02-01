@@ -49,6 +49,32 @@
   }
   @include dyn;
 }
+.envelope_sec {
+  @include envelope;
+  height: 40px;
+  background-color: $secondary;
+  .title {
+    @include title;
+  }
+  &:hover {
+    background-color: $secondaryHover;
+  }
+  &:active {
+    background-color: $secondary;
+  }
+}
+.envelope_dis {
+  @include envelope;
+  @include title;
+  .title {
+    @include title;
+  }
+  height: 40px;
+  background-color: $primaryText;
+  border: 2px solid $secondary;
+  color: $secondary;
+  cursor: default;
+}
 .s_envelope {
   @include envelope;
   @include sTitle;

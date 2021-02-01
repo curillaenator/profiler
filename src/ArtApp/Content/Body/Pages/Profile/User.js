@@ -1,11 +1,11 @@
 import { ProfileCont } from "./ProfileCont";
-import { PostsCont } from "./PostsCont";
+import { NotesCont } from "./Note/NotesCont";
 
 function User() {
   return (
     <>
       <ProfileCont />
-      <PostsCont />
+      <NotesCont />
     </>
   );
 }

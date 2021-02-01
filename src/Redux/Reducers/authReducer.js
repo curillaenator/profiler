@@ -21,16 +21,17 @@ export const authReducer = (state = initialState, action) => {
 
 // ACTIONS
 
-const userData = (userData) => ({ type: "USER-DATA", userData });
-const userAva = (ava) => ({ type: "USER-DATA-AVA", ava });
+const getUserData = (userData) => ({ type: "USER-DATA", userData });
+const getUserAva = (ava) => ({ type: "USER-DATA-AVA", ava });
 
 // THUNKS
 
 export const getUserInfo = () => (dispatch) => {
   authAPI.isAuth().then((r1) => {
     if (r1.resultCode === 0) {
-      dispatch(userData(r1.data));
-      authAPI.getAva(r1.data.id).then((r2) => dispatch(userAva(r2)));
+      dispatch(getUserData(r1.data));
+      authAPI.getAva(r1.data.id).then((r2) => dispatch(getUserAva(r2)));
     }
   });
 };
+
