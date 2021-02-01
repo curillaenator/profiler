@@ -1,6 +1,7 @@
 import React from "react";
+import { compose } from "redux";
 import { connect } from "react-redux";
-
+import { WithAuthRedirect } from "../../../../../HOC/withAuthRedirect";
 import Findusers from "./Findusers";
 
 import {
@@ -44,8 +45,11 @@ const mapStateToProps = (state) => ({
   whileFollow: state.findusers.whileFollow,
 });
 
-export const FindusersCont = connect(mapStateToProps, {
-  getUsers,
-  follower,
-  unfollower
-})(FindusersAJAX);
+export const FindusersCont = compose(
+  WithAuthRedirect,
+  connect(mapStateToProps, {
+    getUsers,
+    follower,
+    unfollower,
+  })
+)(FindusersAJAX);

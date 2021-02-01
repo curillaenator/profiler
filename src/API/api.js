@@ -19,6 +19,9 @@ export const authAPI = {
 };
 
 export const profileAPI = {
-  setProfile: (userId) =>
-    base.get(`profile/${userId}`).then((r) => r.data),
+  setProfile: (userId) => base.get(`profile/${userId}`).then((r) => r.data),
+  getStatus: (userId) =>
+    base.get(`profile/Status/${userId}`).then((r) => r.data),
+  setMyStatus: (status) =>
+    base.put("profile/status", { status }).then((r) => r.data),
 };

@@ -1,5 +1,6 @@
 import Loader from "../../../../UIComponents/Loader/Loader";
 import nullava from "../../../../../assets/images/nullAva.jpg";
+import Status from "./Status/Status";
 
 import styles from "./profile.module.scss";
 
@@ -56,6 +57,7 @@ function Profile(props) {
               </a>
             ))}
           </div>
+          <Status status={props.status} updateMyStatus={props.updateMyStatus} />
         </div>
         <div className={styles.buttons}></div>
       </div>

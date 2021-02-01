@@ -37,6 +37,8 @@
       .socials {
         display: flex;
         align-items: center;
+        margin-bottom: 4px;
+        // height: 24px;
         .uploaded {
           margin-right: 4px;
           & > svg {
