@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Header from "./Header";
 
-import { getUserInfo } from "../../Redux/Reducers/authReducer";
+import { getUserInfo, logout } from "../../Redux/Reducers/authReducer";
 
 class HeaderAJAX extends React.Component {
   componentDidMount() {
@@ -15,6 +15,7 @@ class HeaderAJAX extends React.Component {
         login={this.props.login}
         isAuth={this.props.isAuth}
         ava={this.props.ava}
+        logout={this.props.logout}
       />
     );
   }
@@ -29,4 +30,5 @@ const mapStateToProps = (state) => ({
 
 export const HeaderCont = connect(mapStateToProps, {
   getUserInfo,
+  logout,
 })(HeaderAJAX);

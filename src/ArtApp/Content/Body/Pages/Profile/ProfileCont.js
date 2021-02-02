@@ -2,7 +2,7 @@ import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-// import { WithAuthRedirect } from "../../../../../HOC/withAuthRedirect";
+import { WithAuthRedirect } from "../../../../../HOC/withAuthRedirect";
 import Profile from "./Profile";
 
 import {
@@ -36,7 +36,7 @@ const mapStateToProps = (state) => ({
 });
 
 export const ProfileCont = compose(
-  // WithAuthRedirect,
+  WithAuthRedirect,
   connect(mapStateToProps, { getProfile, getStatus, updateMyStatus }),
   withRouter
 )(ProfileAJAX);

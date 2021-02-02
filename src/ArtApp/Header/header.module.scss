@@ -1,5 +1,28 @@
 @import "../../colors.scss";
 
+@mixin padText {
+  text-decoration: none;
+  transition: 0.07s ease-in-out;
+  & > p {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: $primaryText;
+    margin-left: 8px;
+  }
+}
+
+@mixin padHover {
+  &:hover {
+    transform: scale(1.02);
+    filter: drop-shadow(2px 2px 2px $primaryShadow);
+  }
+  &:active {
+    transform: scale(1);
+    filter: none;
+  }
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -16,43 +39,37 @@
     .find {
       display: flex;
       align-items: center;
-      text-decoration: none;
-      position: relative;
-      transition: 0.07s ease-in-out;
       & > svg {
         width: 16px;
       }
-      & > p {
-        font-size: 12px;
-        font-weight: 600;
-        text-transform: uppercase;
-        color: $secondaryText;
-        margin-left: 8px;
-      }
-      &:hover {
-        transform: scale(1.02);
-        filter: drop-shadow(2px 2px 2px $primaryShadow);
-      }
-      &:active {
-        transform: scale(1);
-        filter: none;
-      }
+      @include padText;
+      @include padHover;
     }
-    .auth {
-      margin-left: 8px;
-      font-size: 12px;
-      text-transform: uppercase;
+    .login {
+      @include padText;
+      @include padHover;
     }
+
     .ava {
       width: 50px;
       height: 50px;
       border-radius: 50%;
       margin-left: 8px;
+      position: relative;
+      cursor: pointer;
       & > img {
         height: 100%;
         width: 100%;
         border-radius: 50%;
         object-fit: cover;
+      }
+      .logout {
+        display: block;
+        width: 80px;
+        position: absolute;
+        bottom: -79px;
+        left: 50%;
+        transform: translateX(-50%);
       }
     }
   }

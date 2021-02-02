@@ -14,6 +14,8 @@ export const authReducer = (state = initialState, action) => {
       return { ...state, ...action.userData, isAuth: true };
     case "USER-DATA-AVA":
       return { ...state, ava: action.ava };
+    case "AFTER-LOGOUT":
+      return action.nullUser;
     default:
       return state;
   }
@@ -23,6 +25,7 @@ export const authReducer = (state = initialState, action) => {
 
 const getUserData = (userData) => ({ type: "USER-DATA", userData });
 const getUserAva = (ava) => ({ type: "USER-DATA-AVA", ava });
+const afterLogout = (nullUser) => ({ type: "AFTER-LOGOUT", nullUser });
 
 // THUNKS
 
@@ -35,3 +38,14 @@ export const getUserInfo = () => (dispatch) => {
   });
 };
 
+export const login = (login) => (dispatch) => {
+  authAPI.login(login).then((r) => {
+    if (r.resultCode === 0) dispatch(getUserInfo());
+  });
+};
+
+export const logout = () => (dispatch) => {
+  authAPI.logout().then((r) => {
+    if (r.resultCode === 0) dispatch(afterLogout(initialState));
+  });
+};

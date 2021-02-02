@@ -17,6 +17,7 @@ export const authAPI = {
   isAuth: () => base.get("auth/me").then((r) => r.data),
   getAva: (id) => base.get(`profile/${id}`).then((r) => r.data.photos.small),
   login: (login) => base.post("auth/login", login).then((r) => r.data),
+  logout: () => base.delete("auth/login").then((r) => r.data),
 };
 
 export const profileAPI = {

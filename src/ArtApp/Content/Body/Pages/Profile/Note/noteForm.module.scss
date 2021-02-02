@@ -1,49 +1,26 @@
 @import "../../../../../../colors.scss";
 
-@mixin textarea {
-  width: 100%;
-  outline: none;
-  border: none;
-  border-radius: 8px;
-  padding: 8px;
-  margin-bottom: 8px;
-
-  font-family: "Montserrat", sans-serif;
-  font-size: 14px;
-  line-height: 1.2;
-  color: $text;
-}
-
 .form {
   background-color: $post;
   margin-bottom: 16px;
   padding: 8px;
   border-radius: 8px;
   .title {
-    & > textarea {
-      @include textarea;
-      height: 32px;
-      resize: none;
-    }
+    margin-bottom: 4px;
   }
   .text {
-    & > textarea {
-      @include textarea;
-      min-height: 46px;
-      max-height: 8rem;
-      resize: vertical;
-    }
+    margin-bottom: 4px;
   }
   .buttons {
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    .add {
-      width: 128px;
-    }
-    .clear {
+    .button {
       width: 128px;
       margin-right: 8px;
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 }

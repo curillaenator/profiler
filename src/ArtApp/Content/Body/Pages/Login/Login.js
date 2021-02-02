@@ -1,22 +1,36 @@
-import React from "react";
+import { connect } from "react-redux";
 import { Form } from "react-final-form";
+import { login } from "../../../../../Redux/Reducers/authReducer";
+import { Redirect } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import styles from "./login.module.scss";
 
-class Login extends React.Component {
-  onSubmit = (formData) => console.log(formData);
-  render() {
-    return (
-      <div className={styles.login}>
-        <h2>Добро пожаловать в Profiler</h2>
-        <Form
-          onSubmit={this.onSubmit}
-          render={({ handleSubmit, pristine }) => (
-            <LoginForm handleSubmit={handleSubmit} pristine={pristine} />
-          )}
-        />
-      </div>
-    );
+const Login = (props) => {
+  const onSubmit = (formData) => props.login(formData);
+
+  if (props.isAuth) {
+    return <Redirect to="/profile" />;
   }
-}
-export default Login;
+
+  return (
+    <div className={styles.login}>
+      <h2>Добро пожаловать в Profiler</h2>
+      <Form
+        onSubmit={onSubmit}
+        render={({ handleSubmit, pristine, values }) => (
+          <LoginForm
+            handleSubmit={handleSubmit}
+            pristine={pristine}
+            values={values}
+          />
+        )}
+      />
+    </div>
+  );
+};
+
+const mstp = (state) => ({
+  isAuth: state.auth.isAuth,
+});
+
+export default connect(mstp, { login })(Login);

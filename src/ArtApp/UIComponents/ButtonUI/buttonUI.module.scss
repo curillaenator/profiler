@@ -51,6 +51,7 @@
 }
 .envelope_sec {
   @include envelope;
+  color: $secondaryText;
   height: 40px;
   background-color: $secondary;
   .title {

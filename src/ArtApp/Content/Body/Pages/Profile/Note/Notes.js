@@ -2,6 +2,7 @@ import React from "react";
 import { Form } from "react-final-form";
 import Note from "./Note";
 import NoteForm from "./NoteForm";
+
 import styles from "./posts.module.scss";
 
 function Posts(props) {

@@ -1,19 +1,36 @@
 import { Field } from "react-final-form";
-
+import { Input } from "../../../../UIComponents/Inputs/Inputs";
 import ButtonUi from "../../../../UIComponents/ButtonUI/ButtonUI";
+
+import {
+  required,
+  minLength,
+  combinedValidators,
+} from "../../../../../Validate/validators";
 
 import styles from "./login.module.scss";
 
 const LoginForm = (props) => {
-  // console.log(props);
+  // console.log(props.values);
   return (
     <form className={styles.form} onSubmit={props.handleSubmit}>
       <div className={styles.input}>
-        <Field name="email" placeholder="Login" component="input" />
+        <Field
+          name="email"
+          placeholder="Login"
+          component={Input}
+          validate={combinedValidators(required, minLength(3))}
+        />
       </div>
 
       <div className={styles.input}>
-        <Field name="password" placeholder="Password" component="input" />
+        <Field
+          name="password"
+          placeholder="Password"
+          type="password"
+          component={Input}
+          validate={combinedValidators(required, minLength(5))}
+        />
       </div>
 
       <div className={styles.checkbox}>
@@ -22,7 +39,10 @@ const LoginForm = (props) => {
       </div>
 
       <div className={styles.submit}>
-        <ButtonUi title="Войти" disabled={props.pristine} />
+        <ButtonUi
+          title="Войти"
+          disabled={!props.values.email || !props.values.password}
+        />
       </div>
     </form>
   );

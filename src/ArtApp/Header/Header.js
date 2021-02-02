@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
-
+import ButtonUI from "../UIComponents/ButtonUI/ButtonUI";
 import nullAva from "../../assets/images/nullAva.jpg";
 
 import styles from "./header.module.scss";
 
 function Header(props) {
-  // console.log(props);
+  console.log(props);
   return (
     <div className={styles.header}>
       <div className={styles.pad}>ArtApp</div>
@@ -14,16 +14,22 @@ function Header(props) {
           {props.search}
           <p>Найти людей</p>
         </NavLink>
-        <div className={props.isAuth ? styles.ava : styles.auth}>
-          {props.isAuth ? (
+
+        {props.isAuth ? (
+          <div className={styles.ava}>
             <img
               src={props.ava === null ? nullAva : props.ava}
               alt={props.login}
             />
-          ) : (
-            "войти"
-          )}
-        </div>
+            <div className={styles.logout}>
+              <ButtonUI title="выйти" type="secondary" handler={props.logout} />
+            </div>
+          </div>
+        ) : (
+          <NavLink to="/login" className={styles.login}>
+            <p>войти</p>
+          </NavLink>
+        )}
       </div>
     </div>
   );

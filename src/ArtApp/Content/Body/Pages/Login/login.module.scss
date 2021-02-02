@@ -22,25 +22,10 @@
   padding: 16px;
   border: 2px solid $post;
   border-radius: 8px;
-
   .input {
     width: 256px;
     height: 40px;
     margin-bottom: 16px;
-    & > input {
-      font-family: "Montserrat", serif;
-      font-size: 14px;
-      text-align: center;
-      width: 100%;
-      height: 100%;
-
-      border: 2px solid $post;
-      border-radius: 8px;
-      outline: none;
-      &:focus {
-          border: 2px solid $primary;
-      }
-    }
   }
   .checkbox {
     display: flex;
