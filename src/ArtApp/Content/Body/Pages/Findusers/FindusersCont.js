@@ -3,53 +3,45 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { WithAuthRedirect } from "../../../../../HOC/withAuthRedirect";
 import Findusers from "./Findusers";
+import * as findUsersSel from "../../../../../Redux/Selectors/findusersSelectors";
+import * as uiSel from "../../../../../Redux/Selectors/uiSelector";
 
 import {
-  getUsers,
+  requestUsers,
   follower,
   unfollower,
 } from "../../../../../Redux/Reducers/findusersReducer";
 
 class FindusersAJAX extends React.Component {
   componentDidMount() {
-    this.props.getUsers(this.props.currentpage, this.props.pagesize);
+    console.log(this.props);
+    this.props.requestUsers(this.props.currentPage, this.props.pageSize);
   }
-  pageHandler = (pageNum) => this.props.getUsers(pageNum, this.props.pagesize);
+
+  pageHandler = (pageNum) =>
+    this.props.requestUsers(pageNum, this.props.pageSize);
 
   render() {
-    // console.log(this.props);
     return (
       <Findusers
-        isFetching={this.props.isFetching}
-        currentpage={this.props.currentpage}
-        follower={this.props.follower}
-        unfollower={this.props.unfollower}
-        whileFollow={this.props.whileFollow}
-        icons={this.props.icons}
-        pagesize={this.props.pagesize}
-        totalusers={this.props.totalusers}
-        users={this.props.users}
+        {...this.props}
         pageHandler={this.pageHandler}
       />
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  users: state.findusers.users,
-  icons: state.ui.icons,
-  totalusers: state.findusers.totalusers,
-  pagesize: state.findusers.pagesize,
-  currentpage: state.findusers.currentpage,
-  isFetching: state.findusers.isFetching,
-  whileFollow: state.findusers.whileFollow,
+const mstp = (state) => ({
+  users: findUsersSel.getUsers(state),
+  icons: uiSel.getIcons(state),
+  totalUsers: findUsersSel.getTotalUsers(state),
+  pageSize: findUsersSel.getPageSize(state),
+  currentPage: findUsersSel.getCurrentPage(state),
+  isFetching: findUsersSel.getIsFetching(state),
+  whileFollow: findUsersSel.getWhileFollow(state),
 });
 
 export const FindusersCont = compose(
   WithAuthRedirect,
-  connect(mapStateToProps, {
-    getUsers,
-    follower,
-    unfollower,
-  })
+  connect(mstp, { requestUsers, follower, unfollower })
 )(FindusersAJAX);

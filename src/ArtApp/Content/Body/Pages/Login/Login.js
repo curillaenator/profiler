@@ -1,18 +1,20 @@
 import { connect } from "react-redux";
 import { Form } from "react-final-form";
+// import { FORM_ERROR } from "final-form";
 import { login } from "../../../../../Redux/Reducers/authReducer";
 import { Redirect } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import styles from "./login.module.scss";
+import { FORM_ERROR } from "final-form";
 
 const Login = (props) => {
   const onSubmit = (formData) => {
-    props.login(formData);
+    return props.login(formData).then((r) => {
+      if (r.resultCode !== 0) return { [FORM_ERROR]: r.messages[0] };
+    });
   };
 
-  if (props.isAuth) {
-    return <Redirect to="/profile" />;
-  }
+  if (props.isAuth) return <Redirect to="/profile" />;
 
   return (
     <div className={styles.login}>

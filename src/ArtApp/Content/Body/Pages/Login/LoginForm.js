@@ -12,7 +12,7 @@ import {
 import styles from "./login.module.scss";
 
 const LoginForm = (props) => {
-  // console.log(props);
+  console.log(props);
   return (
     <form className={styles.form} onSubmit={props.handleSubmit}>
       <div className={styles.input}>
@@ -46,7 +46,9 @@ const LoginForm = (props) => {
         />
       </div>
 
-      {props.submitError && <div>{props.submitError}</div>}
+      {props.submitError && (
+        <div className={styles.formError}>{props.submitError}</div>
+      )}
     </form>
   );
 };

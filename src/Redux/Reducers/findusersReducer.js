@@ -2,9 +2,9 @@ import { usersAPI } from "../../API/api";
 
 const initialState = {
   users: [],
-  pagesize: 12,
-  totalusers: 0,
-  currentpage: 1,
+  pageSize: 12,
+  totalUsers: 0,
+  currentPage: 1,
   isFetching: false,
   whileFollow: [],
 };
@@ -39,11 +39,11 @@ export const findusersReducer = (state = initialState, action) => {
           : state.whileFollow.filter((id) => id !== action.id),
       };
     case "SET-TOTALUSERS":
-      return { ...state, totalusers: action.total };
+      return { ...state, totalUsers: action.total };
     case "SET-USERS":
       return { ...state, users: [...action.users] };
     case "SET-CURRENTPAGE":
-      return { ...state, currentpage: action.page };
+      return { ...state, currentPage: action.page };
     case "IS-FETCHING":
       return { ...state, isFetching: action.fetch };
     default:
@@ -53,20 +53,20 @@ export const findusersReducer = (state = initialState, action) => {
 
 // ACTIONS
 
-export const follow = (id) => ({ type: "FOLLOW", id });
-export const unfollow = (id) => ({ type: "UNFOLLOW", id });
-export const whileFollow = (id, bool) => ({ type: "WHILE-FOLLOW", id, bool });
-export const setUsers = (users) => ({ type: "SET-USERS", users });
-export const setTotalUsers = (total) => ({ type: "SET-TOTALUSERS", total });
-export const setCurrentPage = (page) => ({ type: "SET-CURRENTPAGE", page });
-export const fetching = (fetch) => ({ type: "IS-FETCHING", fetch });
+const follow = (id) => ({ type: "FOLLOW", id });
+const unfollow = (id) => ({ type: "UNFOLLOW", id });
+const whileFollow = (id, bool) => ({ type: "WHILE-FOLLOW", id, bool });
+const setUsers = (users) => ({ type: "SET-USERS", users });
+const setTotalUsers = (total) => ({ type: "SET-TOTALUSERS", total });
+const setCurrentPage = (page) => ({ type: "SET-CURRENTPAGE", page });
+const fetching = (fetch) => ({ type: "IS-FETCHING", fetch });
 
 // THUNKS
 
-export const getUsers = (page, pagesize) => (dispatch) => {
+export const requestUsers = (page, pageSize) => (dispatch) => {
   dispatch(fetching(true));
   dispatch(setCurrentPage(page));
-  usersAPI.getUsers(page, pagesize).then((data) => {
+  usersAPI.getUsers(page, pageSize).then((data) => {
     dispatch(setTotalUsers(data.totalCount));
     dispatch(setUsers(data.items));
     dispatch(fetching(false));
@@ -80,6 +80,7 @@ export const follower = (id) => (dispatch) => {
     dispatch(whileFollow(id, false));
   });
 };
+
 export const unfollower = (id) => (dispatch) => {
   dispatch(whileFollow(id, true));
   usersAPI.unfollow(id).then((data) => {

@@ -36,5 +36,12 @@
   }
   .submit {
     width: 128px;
+    margin-bottom: 16px;
+  }
+  .formError {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: $danger;
   }
 }

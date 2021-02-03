@@ -5,8 +5,7 @@ import Loader from "../../../../UIComponents/Loader/Loader";
 import styles from "./findusers.module.scss";
 
 const Pagination = (props) => {
-  //   const pagesCnt = Math.ceil(props.totalusers / props.pagesize);
-  //   console.log(pagesCnt);
+  // console.log(props);
   const pages = new Array(8).fill(0).map((e, i) => i + 1);
   return (
     <div className={styles.pagination_track}>
@@ -16,7 +15,7 @@ const Pagination = (props) => {
           <div className={styles.item} key={p}>
             <SButtonUI
               title={p}
-              type={p === props.currentpage && "activated"}
+              type={p === props.currentPage && "activated"}
               handler={props.pageHandler}
               handlerArgs={p}
             />
@@ -34,10 +33,10 @@ function Findusers(props) {
       <div className={styles.searchbox}></div>
       <Pagination
         isFetching={props.isFetching}
-        currentpage={props.currentpage}
+        currentPage={props.currentPage}
         pageHandler={props.pageHandler}
-        totalusers={props.totalusers}
-        pagesize={props.pagesize}
+        totalUsers={props.totalUsers}
+        pageSize={props.pageSize}
       />
       <div className={styles.users}>
         {props.users.map((u) => (
