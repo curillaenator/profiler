@@ -1,6 +1,7 @@
 import { Field } from "react-final-form";
 import { Input } from "../../../../UIComponents/Inputs/Inputs";
 import ButtonUi from "../../../../UIComponents/ButtonUI/ButtonUI";
+// import { FORM_ERROR } from "final-form";
 
 import {
   required,
@@ -11,7 +12,7 @@ import {
 import styles from "./login.module.scss";
 
 const LoginForm = (props) => {
-  // console.log(props.values);
+  // console.log(props);
   return (
     <form className={styles.form} onSubmit={props.handleSubmit}>
       <div className={styles.input}>
@@ -44,6 +45,8 @@ const LoginForm = (props) => {
           disabled={!props.values.email || !props.values.password}
         />
       </div>
+
+      {props.submitError && <div>{props.submitError}</div>}
     </form>
   );
 };

@@ -1,8 +1,8 @@
 import styles from "./inputs.module.scss";
 
 export const Input = ({ input, meta, ...props }) => {
+  // console.log({ ...meta });
   const hasError = meta.touched && meta.error;
-
   return (
     <div className={styles.input + " " + (hasError ? styles.inputError : "")}>
       <input {...input} {...props} />

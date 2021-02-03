@@ -6,7 +6,9 @@ import LoginForm from "./LoginForm";
 import styles from "./login.module.scss";
 
 const Login = (props) => {
-  const onSubmit = (formData) => props.login(formData);
+  const onSubmit = (formData) => {
+    props.login(formData);
+  };
 
   if (props.isAuth) {
     return <Redirect to="/profile" />;
@@ -17,11 +19,12 @@ const Login = (props) => {
       <h2>Добро пожаловать в Profiler</h2>
       <Form
         onSubmit={onSubmit}
-        render={({ handleSubmit, pristine, values }) => (
+        render={({ handleSubmit, pristine, values, submitError }) => (
           <LoginForm
             handleSubmit={handleSubmit}
             pristine={pristine}
             values={values}
+            submitError={submitError}
           />
         )}
       />
@@ -31,6 +34,7 @@ const Login = (props) => {
 
 const mstp = (state) => ({
   isAuth: state.auth.isAuth,
+  authMessage: state.auth.authMessage,
 });
 
 export default connect(mstp, { login })(Login);

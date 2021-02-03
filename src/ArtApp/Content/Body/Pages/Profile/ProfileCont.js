@@ -15,7 +15,7 @@ class ProfileAJAX extends React.Component {
   componentDidMount() {
     // console.log(this.props);
     let userId = !this.props.match.params.userId
-      ? "14217"
+      ? this.props.ownerId
       : this.props.match.params.userId;
 
     this.props.getProfile(userId);
@@ -27,7 +27,7 @@ class ProfileAJAX extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  myId: state.auth.id,
+  ownerId: state.auth.id,
   user: state.profile.user,
   socials: state.profile.socials,
   status: state.profile.status,

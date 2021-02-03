@@ -5,7 +5,7 @@ import nullAva from "../../assets/images/nullAva.jpg";
 import styles from "./header.module.scss";
 
 function Header(props) {
-  console.log(props);
+  // console.log(props);
   return (
     <div className={styles.header}>
       <div className={styles.pad}>ArtApp</div>
