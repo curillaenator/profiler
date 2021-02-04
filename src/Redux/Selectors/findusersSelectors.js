@@ -1,4 +1,10 @@
-export const getUsers = (state) => state.findusers.users;
+import { createSelector } from "reselect";
+
+const getUsersInitial = (state) => state.findusers.users;
+export const getUsers = createSelector(getUsersInitial, (users) =>
+  users.map((u) => u)
+);
+
 export const getPageSize = (state) => state.findusers.pageSize;
 export const getTotalUsers = (state) => state.findusers.totalUsers;
 export const getCurrentPage = (state) => state.findusers.currentPage;
