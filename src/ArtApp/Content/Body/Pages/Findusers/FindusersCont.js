@@ -22,7 +22,7 @@ const FindusersAJAX = (props) => {
     pageSize,
   ]);
 
-  const pageHandler = (pageNum) => props.setCurrentPage(pageNum);
+  const pageHandler = (pageNum, q) => props.setCurrentPage(pageNum, q);
 
   return <Findusers {...props} pageHandler={pageHandler} />;
 };
@@ -32,7 +32,8 @@ const mstp = (state) => ({
   icons: uiSel.getIcons(state),
   totalUsers: findUsersSel.getTotalUsers(state),
   pageSize: findUsersSel.getPageSize(state),
-  pageQuantize: findUsersSel.getPageQuatize(state),
+  pageQuant: findUsersSel.getPageQuant(state),
+  currentQuant: findUsersSel.getCurrentQuant(state),
   currentPage: findUsersSel.getCurrentPage(state),
   isFetching: findUsersSel.getIsFetching(state),
   whileFollow: findUsersSel.getWhileFollow(state),

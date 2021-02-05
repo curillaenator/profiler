@@ -6,7 +6,8 @@ export const getUsers = createSelector(getUsersInitial, (users) =>
 );
 
 export const getPageSize = (state) => state.findusers.pageSize;
-export const getPageQuatize = (state) => state.findusers.pageQuantize;
+export const getPageQuant = (state) => state.findusers.pageQuant;
+export const getCurrentQuant = (state) => state.findusers.currentQuant;
 export const getTotalUsers = (state) => state.findusers.totalUsers;
 export const getCurrentPage = (state) => state.findusers.currentPage;
 export const getIsFetching = (state) => state.findusers.isFetching;

@@ -32,7 +32,8 @@ function Findusers(props) {
         pageHandler={props.pageHandler}
         totalUsers={props.totalUsers}
         pageSize={props.pageSize}
-        pageQuantize={props.pageQuantize}
+        pageQuant={props.pageQuant}
+        currentQuant={props.currentQuant}
       />
       <div className={styles.users}>
         {props.users.map((u) => (
