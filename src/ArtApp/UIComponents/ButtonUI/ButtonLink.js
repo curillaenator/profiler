@@ -9,7 +9,7 @@ function ButtonUI(props) {
       className={styles.envelope}
       activeClassName={styles.active}
     >
-      <div className={styles.title}>{props.title}</div>
+      {props.title}
     </NavLink>
   );
 }

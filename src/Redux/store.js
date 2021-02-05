@@ -5,7 +5,7 @@ import { appReducer } from "./Reducers/appReducer";
 import { uiReducer } from "./Reducers/uiReducer";
 import { findusersReducer } from "./Reducers/findusersReducer";
 import { profileReducer } from "./Reducers/profileReducer";
-import { postsReducer as notesReducer } from "./Reducers/notesReducer";
+import { notesReducer } from "./Reducers/notesReducer";
 import { authReducer } from "./Reducers/authReducer";
 
 const reducers = combineReducers({

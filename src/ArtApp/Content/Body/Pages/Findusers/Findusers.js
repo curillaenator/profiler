@@ -1,30 +1,25 @@
-import SButtonUI from "../../../../UIComponents/ButtonUI/sButtonUI";
+import Pagination from "../../../../UIComponents/Pagination/Pagination";
+// import ButtonUI from "../../../../UIComponents/ButtonUI/ButtonUI";
 import Usercard from "./Usercard";
-import Loader from "../../../../UIComponents/Loader/Loader";
+// import Loader from "../../../../UIComponents/Loader/Loader";
 
 import styles from "./findusers.module.scss";
 
-const Pagination = (props) => {
-  // console.log(props);
-  const pages = new Array(8).fill(0).map((e, i) => i + 1);
-  return (
-    <div className={styles.pagination_track}>
-      {props.isFetching ? <Loader /> : null}
-      <div className={styles.pagination}>
-        {pages.map((p) => (
-          <div className={styles.item} key={p}>
-            <SButtonUI
-              title={p}
-              type={p === props.currentPage && "activated"}
-              handler={props.pageHandler}
-              handlerArgs={p}
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+// const PageLoader = (props) => {
+//   const pageNum = props.currentPage + 1;
+//   return (
+//     <div className={styles.addMore}>
+//       {props.isFetching && <Loader />}
+//       <div className={styles.addMoreBtn}>
+//         <ButtonUI
+//           title={`добавить еще ${props.pageSize} пользователя`}
+//           handler={props.pageHandler}
+//           handlerArgs={pageNum}
+//         />
+//       </div>
+//     </div>
+//   );
+// };
 
 function Findusers(props) {
   // console.log(props);
@@ -37,6 +32,7 @@ function Findusers(props) {
         pageHandler={props.pageHandler}
         totalUsers={props.totalUsers}
         pageSize={props.pageSize}
+        pageQuantize={props.pageQuantize}
       />
       <div className={styles.users}>
         {props.users.map((u) => (
@@ -50,6 +46,13 @@ function Findusers(props) {
           />
         ))}
       </div>
+      {/* <PageLoader
+        isFetching={props.isFetching}
+        currentPage={props.currentPage}
+        pageHandler={props.pageHandler}
+        totalUsers={props.totalUsers}
+        pageSize={props.pageSize}
+      /> */}
     </div>
   );
 }

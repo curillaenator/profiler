@@ -24,15 +24,14 @@ const setStatus = (userId) => ({ type: "SET-STATUS", userId });
 
 // THUNKS
 
-export const getProfile = (userId) => (dispatch) => {
+export const requestProfile = (userId) => (dispatch) => {
   profileAPI.setProfile(userId).then((r) => dispatch(setUser(r)));
 };
-export const getStatus = (userId) => (dispatch) => {
+export const requestStatus = (userId) => (dispatch) => {
   profileAPI.getStatus(userId).then((r) => dispatch(setStatus(r)));
 };
 export const updateMyStatus = (status) => (dispatch) => {
   profileAPI
     .setMyStatus(status)
     .then((r) => r.resultCode === 0 && dispatch(setStatus(status)));
-  // profileAPI.getStatus()
 };

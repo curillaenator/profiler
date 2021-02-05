@@ -1,8 +1,10 @@
 import { usersAPI } from "../../API/api";
+import * as flow from "../ReduxUtils/findusersFlow";
 
 const initialState = {
   users: [],
-  pageSize: 12,
+  pageSize: 24,
+  pageQuantize: 8,
   totalUsers: 0,
   currentPage: 1,
   isFetching: false,
@@ -12,24 +14,16 @@ const initialState = {
 export const findusersReducer = (state = initialState, action) => {
   switch (action.type) {
     case "FOLLOW":
+      const followTrue = { followed: true };
       return {
         ...state,
-        users: state.users.map((u) => {
-          if (u.id === action.id) {
-            return { ...u, followed: true };
-          }
-          return u;
-        }),
+        users: flow.followUser(state.users, action.id, "id", followTrue),
       };
     case "UNFOLLOW":
+      const followFalse = { followed: false };
       return {
         ...state,
-        users: state.users.map((u) => {
-          if (u.id === action.id) {
-            return { ...u, followed: false };
-          }
-          return u;
-        }),
+        users: flow.followUser(state.users, action.id, "id", followFalse),
       };
     case "WHILE-FOLLOW":
       return {
@@ -55,17 +49,17 @@ export const findusersReducer = (state = initialState, action) => {
 
 const follow = (id) => ({ type: "FOLLOW", id });
 const unfollow = (id) => ({ type: "UNFOLLOW", id });
-const whileFollow = (id, bool) => ({ type: "WHILE-FOLLOW", id, bool });
+export const whileFollow = (id, bool) => ({ type: "WHILE-FOLLOW", id, bool });
 const setUsers = (users) => ({ type: "SET-USERS", users });
 const setTotalUsers = (total) => ({ type: "SET-TOTALUSERS", total });
-const setCurrentPage = (page) => ({ type: "SET-CURRENTPAGE", page });
+const currentPage = (page) => ({ type: "SET-CURRENTPAGE", page });
 const fetching = (fetch) => ({ type: "IS-FETCHING", fetch });
 
 // THUNKS
 
 export const requestUsers = (page, pageSize) => (dispatch) => {
   dispatch(fetching(true));
-  dispatch(setCurrentPage(page));
+  dispatch(currentPage(page));
   usersAPI.getUsers(page, pageSize).then((data) => {
     dispatch(setTotalUsers(data.totalCount));
     dispatch(setUsers(data.items));
@@ -73,18 +67,12 @@ export const requestUsers = (page, pageSize) => (dispatch) => {
   });
 };
 
-export const follower = (id) => (dispatch) => {
-  dispatch(whileFollow(id, true));
-  usersAPI.follow(id).then((data) => {
-    if (data.resultCode === 0) dispatch(follow(id));
-    dispatch(whileFollow(id, false));
-  });
+export const setCurrentPage = (page) => (dispatch) => {
+  dispatch(currentPage(page));
 };
 
-export const unfollower = (id) => (dispatch) => {
-  dispatch(whileFollow(id, true));
-  usersAPI.unfollow(id).then((data) => {
-    if (data.resultCode === 0) dispatch(unfollow(id));
-    dispatch(whileFollow(id, false));
-  });
-};
+export const follower = (id) => (dispatch) =>
+  flow.follow(id, dispatch, usersAPI.follow.bind(usersAPI), follow);
+
+export const unfollower = (id) => (dispatch) =>
+  flow.follow(id, dispatch, usersAPI.unfollow.bind(usersAPI), unfollow);

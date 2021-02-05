@@ -6,7 +6,7 @@
   align-items: center;
   border-radius: 8px;
   width: 100%;
-  height: 20px;
+  height: 100%;
   background-color: $primary;
   outline: none;
   border: none;
@@ -21,19 +21,9 @@
 
   cursor: pointer;
 }
-@mixin title {
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: $primaryText;
-}
-@mixin sTitle {
-  font-size: 10px;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: $primaryText;
-}
-@mixin dyn {
+
+.envelope {
+  @include envelope;
   &:hover {
     background-color: $primaryHover;
   }
@@ -41,69 +31,41 @@
     background-color: $primary;
   }
 }
-.envelope {
-  @include envelope;
-  height: 40px;
-  .title {
-    @include title;
-  }
-  @include dyn;
-}
 .envelope_sec {
   @include envelope;
   color: $secondaryText;
-  height: 40px;
   background-color: $secondary;
-  .title {
-    @include title;
-  }
   &:hover {
     background-color: $secondaryHover;
   }
   &:active {
     background-color: $secondary;
   }
+}
+.envelope_act {
+  @include envelope;
+  background-color: $primaryActive;
+  color: $primaryText;
+  cursor: default;
 }
 .envelope_dis {
   @include envelope;
-  @include title;
-  .title {
-    @include title;
-  }
-  height: 40px;
   background-color: $primaryText;
   border: 2px solid $secondary;
   color: $secondary;
   cursor: default;
 }
-.s_envelope {
+.envelope_dang {
   @include envelope;
-  @include sTitle;
-  @include dyn;
-}
-.s_envelope_sec {
-  @include envelope;
-  @include sTitle;
-  background-color: $secondary;
+  background-color: $danger;
+  color: $dangerText;
   &:hover {
-    background-color: $secondaryHover;
+    background-color: $dangerHover;
   }
   &:active {
-    background-color: $secondary;
+    background-color: $danger;
+    color: $dangerTextClick;
   }
-}
-.s_envelope_act {
-  @include envelope;
-  @include sTitle;
-  background-color: $primaryActive;
-}
-.s_envelope_dis {
-  @include envelope;
-  @include sTitle;
-  background-color: $primaryText;
-  border: 2px solid $secondary;
-  color: $secondary;
-  cursor: default;
 }
 .active {
   background-color: $primaryActive;

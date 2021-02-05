@@ -6,7 +6,9 @@ function Menu(props) {
   return (
     <div className={styles.menu} style={{ height: props.heigth }}>
       {Object.keys(props.buttons).map((btn) => (
-        <ButtonLink title={props.buttons[btn]} link={btn} key={btn} />
+        <div className={styles.menuBtn} key={btn}>
+          <ButtonLink title={props.buttons[btn]} link={btn} />
+        </div>
       ))}
     </div>
   );

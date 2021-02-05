@@ -1,5 +1,9 @@
 import { authAPI } from "../../API/api";
 
+const USERDATA = "authReducer/USER-DATA";
+const USERAVA = "authReducer/USER-AVA";
+const AFTERLOGOUT = "authReducer/AFTER-LOGOUT";
+
 const initialState = {
   id: null,
   email: null,
@@ -10,11 +14,11 @@ const initialState = {
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "USER-DATA":
+    case USERDATA:
       return { ...state, ...action.userData, isAuth: true };
-    case "USER-DATA-AVA":
+    case USERAVA:
       return { ...state, ava: action.ava };
-    case "AFTER-LOGOUT":
+    case AFTERLOGOUT:
       return action.nullUser;
     default:
       return state;
@@ -23,9 +27,9 @@ export const authReducer = (state = initialState, action) => {
 
 // ACTIONS
 
-const getUserData = (userData) => ({ type: "USER-DATA", userData });
-const getUserAva = (ava) => ({ type: "USER-DATA-AVA", ava });
-const afterLogout = (nullUser) => ({ type: "AFTER-LOGOUT", nullUser });
+const getUserData = (userData) => ({ type: USERDATA, userData });
+const getUserAva = (ava) => ({ type: USERAVA, ava });
+const afterLogout = (nullUser) => ({ type: AFTERLOGOUT, nullUser });
 
 // THUNKS
 

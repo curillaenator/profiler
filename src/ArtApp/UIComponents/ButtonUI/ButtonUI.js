@@ -1,6 +1,8 @@
 import styles from "./buttonUI.module.scss";
 
 function ButtonUI(props) {
+  const fontSize = props.fontsize !== undefined && props.fontsize;
+
   const disabled = () =>
     props.disabled === undefined ? false : props.disabled;
 
@@ -12,7 +14,9 @@ function ButtonUI(props) {
       case "secondary":
         return styles.envelope_sec;
       case "activated":
-        return styles.senvelope_act;
+        return styles.envelope_act;
+      case "danger":
+        return styles.envelope_dang;
       default:
         return styles.envelope;
     }
@@ -22,7 +26,12 @@ function ButtonUI(props) {
   const run = () => (props.handler === undefined ? "" : props.handler(args()));
 
   return (
-    <button className={btnStyle()} onClick={run} disabled={disabled()}>
+    <button
+      className={btnStyle()}
+      onClick={run}
+      disabled={disabled()}
+      style={{ fontSize }}
+    >
       {props.title}
     </button>
   );

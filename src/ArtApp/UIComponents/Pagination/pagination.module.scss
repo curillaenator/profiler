@@ -1,0 +1,23 @@
+@import "../../../colors.scss";
+
+.pagination_track {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 16px;
+  width: 100%;
+  .pagination {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    margin-left: 16px;
+    .item {
+      width: 20px;
+      height: 20px;
+      margin-right: 4px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

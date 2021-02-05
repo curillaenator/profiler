@@ -8,26 +8,6 @@
     border-radius: 8px;
     margin-bottom: 16px;
   }
-  .pagination_track {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-bottom: 16px;
-    width: 100%;
-    .pagination {
-      display: flex;
-      align-items: center;
-      height: 40px;
-      margin-left: 16px;
-      .item {
-        width: 20px;
-        margin-right: 4px;
-        &:last-child {
-          margin-right: 0;
-        }
-      }
-    }
-  }
   .users {
     display: flex;
     justify-content: space-between;
@@ -78,8 +58,9 @@
         opacity: 0.12;
       }
     }
-    .sbutton {
+    .button {
       width: 80%;
+      height: 20px;
     }
   }
   .data {
@@ -117,6 +98,19 @@
     }
   }
 }
+.addMore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  .addMoreBtn {
+    width: 320px;
+    height: 40px;
+    margin: 16px 0;
+  }
+}
+
 @media (min-width: 640px) {
   .usercard {
     width: calc(50% - 8px);

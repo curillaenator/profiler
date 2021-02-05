@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../Redux/Reducers/authReducer";
@@ -7,30 +7,21 @@ import Header from "./Header/Header";
 import Content from "./Content/Content";
 import Loader from "./UIComponents/Loader/Loader";
 
-class ArtApp extends React.Component {
-  componentDidMount() {
-    this.props.initializeApp();
-  }
+const ArtApp = (props) => {
+  const { initializeApp, isInitialized, ...dimProps } = props;
+  useEffect(() => initializeApp(), [initializeApp]);
 
-  render() {
-    if (!this.props.isInitialized) return <Loader />;
+  if (!isInitialized) return <Loader />;
 
-    return (
-      <BrowserRouter>
-        <div className="artapp">
-          <Header
-            search={this.props.search}
-            login={this.props.login}
-            isAuth={this.props.isAuth}
-            ava={this.props.ava}
-            logout={this.props.logout}
-          />
-          <Content />
-        </div>
-      </BrowserRouter>
-    );
-  }
-}
+  return (
+    <BrowserRouter>
+      <div className="artapp">
+        <Header {...dimProps} />
+        <Content />
+      </div>
+    </BrowserRouter>
+  );
+};
 
 const mstp = (state) => ({
   // APP INIT

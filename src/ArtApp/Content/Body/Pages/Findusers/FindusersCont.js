@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { WithAuthRedirect } from "../../../../../HOC/withAuthRedirect";
@@ -8,34 +8,31 @@ import * as uiSel from "../../../../../Redux/Selectors/uiSelector";
 
 import {
   requestUsers,
+  setCurrentPage,
   follower,
   unfollower,
 } from "../../../../../Redux/Reducers/findusersReducer";
 
-class FindusersAJAX extends React.Component {
-  componentDidMount() {
-    console.log(this.props);
-    this.props.requestUsers(this.props.currentPage, this.props.pageSize);
-  }
+const FindusersAJAX = (props) => {
+  const { requestUsers, currentPage, pageSize } = props;
 
-  pageHandler = (pageNum) =>
-    this.props.requestUsers(pageNum, this.props.pageSize);
+  useEffect(() => requestUsers(currentPage, pageSize), [
+    requestUsers,
+    currentPage,
+    pageSize,
+  ]);
 
-  render() {
-    return (
-      <Findusers
-        {...this.props}
-        pageHandler={this.pageHandler}
-      />
-    );
-  }
-}
+  const pageHandler = (pageNum) => props.setCurrentPage(pageNum);
+
+  return <Findusers {...props} pageHandler={pageHandler} />;
+};
 
 const mstp = (state) => ({
   users: findUsersSel.getUsers(state),
   icons: uiSel.getIcons(state),
   totalUsers: findUsersSel.getTotalUsers(state),
   pageSize: findUsersSel.getPageSize(state),
+  pageQuantize: findUsersSel.getPageQuatize(state),
   currentPage: findUsersSel.getCurrentPage(state),
   isFetching: findUsersSel.getIsFetching(state),
   whileFollow: findUsersSel.getWhileFollow(state),
@@ -43,5 +40,5 @@ const mstp = (state) => ({
 
 export const FindusersCont = compose(
   WithAuthRedirect,
-  connect(mstp, { requestUsers, follower, unfollower })
+  connect(mstp, { requestUsers, setCurrentPage, follower, unfollower })
 )(FindusersAJAX);

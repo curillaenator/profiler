@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-import SButtonUI from "../../../../UIComponents/ButtonUI/sButtonUI";
+import ButtonUI from "../../../../UIComponents/ButtonUI/ButtonUI";
 import styles from "./findusers.module.scss";
 import nullAva from "../../../../../assets/images/nullAva.jpg";
 
@@ -25,20 +25,22 @@ const Usercard = (props) => {
             alt="Avatar"
           />
         </NavLink>
-        <div className={styles.sbutton}>
+        <div className={styles.button}>
           {props.user.followed ? (
-            <SButtonUI
+            <ButtonUI
               disabled={props.whileFollow.some((id) => id === props.user.id)}
               title="отписка"
               type={"secondary"}
               handler={followHandler}
+              fontsize={'10px'}
             />
           ) : (
-            <SButtonUI
+            <ButtonUI
               disabled={props.whileFollow.some((id) => id === props.user.id)}
               title="в друзья"
               type={"primary"}
               handler={followHandler}
+              fontsize={'10px'}
             />
           )}
         </div>

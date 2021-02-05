@@ -3,7 +3,7 @@ import { Form } from "react-final-form";
 import Note from "./Note";
 import NoteForm from "./NoteForm";
 
-import styles from "./posts.module.scss";
+import styles from "./notes.module.scss";
 
 function Posts(props) {
   const onSubmit = (formData) => props.createNote(formData);

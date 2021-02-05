@@ -3,8 +3,8 @@ import Notes from "./Notes";
 
 import { createNote } from "../../../../../../Redux/Reducers/notesReducer";
 
-const mapStateToProps = (state) => ({
+const mstp = (state) => ({
   notes: state.notes,
 });
 
-export const NotesCont = connect(mapStateToProps, { createNote })(Notes);
+export const NotesCont = connect(mstp, { createNote })(Notes);

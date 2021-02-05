@@ -17,9 +17,12 @@ const initialState = {
   ],
 };
 
-export const postsReducer = (state = initialState, action) => {
+const NOTE_CREATE = "notesReducer/NOTE-CREATE";
+const NOTE_DELETE = "notesReducer/NOTE-DELETE";
+
+export const notesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "NOTE-CREATE":
+    case NOTE_CREATE:
       const idsArr = state.notes.map((p) => p.id);
       const dater = (op) => new Date().toLocaleString("ru", op);
       return {
@@ -34,9 +37,12 @@ export const postsReducer = (state = initialState, action) => {
           ...state.notes,
         ],
       };
+    case NOTE_DELETE:
+      return { ...state, notes: state.notes.filter((n) => n.id !== action.id) };
     default:
       return state;
   }
 };
 
-export const createNote = (note) => ({ type: "NOTE-CREATE", note });
+export const createNote = (note) => ({ type: NOTE_CREATE, note });
+export const deleteNote = (id) => ({ type: NOTE_DELETE, id });
