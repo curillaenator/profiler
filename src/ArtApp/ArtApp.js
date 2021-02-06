@@ -17,7 +17,7 @@ const App = (props) => {
   if (!isInitialized) return <Loader />;
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <div className="artapp">
         <Header {...dimProps} />
         <Content />

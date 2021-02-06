@@ -30,7 +30,7 @@ const LoginForm = (props) => {
           placeholder="Password"
           type="password"
           component={Input}
-          validate={combinedValidators(required, minLength(5))}
+          validate={combinedValidators(required, minLength(4))}
         />
       </div>
 
