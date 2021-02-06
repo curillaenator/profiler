@@ -3,8 +3,8 @@ import * as flow from "../ReduxUtils/findusersFlow";
 
 const initialState = {
   users: [],
-  pageSize: 24,
-  pageQuant: 8, // sets qty of pages buttons in pagination
+  pageSize: 50,
+  pageQuant: 10, // sets qty of pages buttons in pagination
   currentQuant: 0,
   totalUsers: 0,
   currentPage: 1,

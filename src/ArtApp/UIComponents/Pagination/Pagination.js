@@ -4,32 +4,42 @@ import ButtonUI from "../ButtonUI/ButtonUI";
 import styles from "./pagination.module.scss";
 
 const Pagination = (props) => {
+  const { pageQuant, currentQuant } = props;
+
   const totalPages = Math.ceil(props.totalUsers / props.pageSize);
 
-  const [quant, setQuant] = useState(props.currentQuant);
-  const incr = () => {
-    quant + props.pageQuant < totalPages && setQuant(quant + props.pageQuant);
-    props.pageHandler(quant + props.pageQuant + 1, quant + props.pageQuant);
+  const [quant, setQuant] = useState(currentQuant);
+  
+  const pagesIncr = () => {
+    quant + pageQuant < totalPages && setQuant(quant + pageQuant);
+    props.pageHandler(quant + pageQuant + 1, quant + pageQuant);
   };
-  const decr = () => {
-    quant - props.pageQuant >= 0 && setQuant(quant - props.pageQuant);
-    props.pageHandler(quant - props.pageQuant + 1, quant - props.pageQuant);
+  const pagesDecr = () => {
+    quant - pageQuant >= 0 && setQuant(quant - pageQuant);
+    props.pageHandler(quant - pageQuant + 1, quant - pageQuant);
   };
-  const handle = (pageNum, q = props.currentQuant) =>
+  const handle = (pageNum, q = currentQuant) =>
     props.pageHandler(pageNum, q);
-  const pages = new Array(props.pageQuant)
+
+  const pages = new Array(pageQuant)
     .fill(1)
-    .map((page, i) => page + i + quant);
+    .filter((p, i) => p + i + quant <= totalPages)
+    .map((p, i) => p + i + quant);
 
   return (
     <div className={styles.pagination_track}>
       {props.isFetching && <Loader />}
       <div className={styles.pagination}>
-        <div className={styles.item}>
-          <ButtonUI title="<" handler={decr} disabled={quant === 0} />
+        <div className={styles.prev}>
+          <ButtonUI
+            title="пред."
+            handler={pagesDecr}
+            disabled={quant === 0}
+            fontsize="10px"
+          />
         </div>
         {pages.map((p) => (
-          <div className={styles.item} key={p}>
+          <div className={styles.page} key={p}>
             <ButtonUI
               title={p}
               type={p === props.currentPage && "activated"}
@@ -39,8 +49,13 @@ const Pagination = (props) => {
             />
           </div>
         ))}
-        <div className={styles.item}>
-          <ButtonUI title=">" handler={incr} />
+        <div className={styles.next}>
+          <ButtonUI
+            title="след."
+            handler={pagesIncr}
+            disabled={currentQuant + pageQuant >= totalPages}
+            fontsize="10px"
+          />
         </div>
       </div>
     </div>

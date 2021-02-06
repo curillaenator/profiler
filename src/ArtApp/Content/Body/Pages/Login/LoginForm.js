@@ -1,6 +1,6 @@
 import { Field } from "react-final-form";
 import { Input } from "../../../../UIComponents/Inputs/Inputs";
-import ButtonUi from "../../../../UIComponents/ButtonUI/ButtonUI";
+import ButtonUI from "../../../../UIComponents/ButtonUI/ButtonUI";
 // import { FORM_ERROR } from "final-form";
 
 import {
@@ -40,7 +40,7 @@ const LoginForm = (props) => {
       </div>
 
       <div className={styles.submit}>
-        <ButtonUi
+        <ButtonUI
           title="Войти"
           disabled={!props.values.email || !props.values.password}
         />

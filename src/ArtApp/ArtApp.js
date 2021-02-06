@@ -1,13 +1,16 @@
 import { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
-import { connect } from "react-redux";
+import { Provider, connect } from "react-redux";
+import { store } from "../Redux/store";
 import { logout } from "../Redux/Reducers/authReducer";
 import { initializeApp } from "./../Redux/Reducers/appReducer";
 import Header from "./Header/Header";
 import Content from "./Content/Content";
 import Loader from "./UIComponents/Loader/Loader";
 
-const ArtApp = (props) => {
+import "../index.scss";
+
+const App = (props) => {
   const { initializeApp, isInitialized, ...dimProps } = props;
   useEffect(() => initializeApp(), [initializeApp]);
 
@@ -34,5 +37,13 @@ const mstp = (state) => ({
   // FOR CONTENT
   // ...
 });
+const AppCont = connect(mstp, { initializeApp, logout })(App);
 
-export default connect(mstp, { initializeApp, logout })(ArtApp);
+const ArtApp = () => {
+  return (
+    <Provider store={store}>
+      <AppCont />
+    </Provider>
+  );
+};
+export default ArtApp;

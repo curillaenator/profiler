@@ -39,7 +39,9 @@ const mstp = (state) => ({
   whileFollow: findUsersSel.getWhileFollow(state),
 });
 
-export const FindusersCont = compose(
+const FindusersCont = compose(
   WithAuthRedirect,
   connect(mstp, { requestUsers, setCurrentPage, follower, unfollower })
 )(FindusersAJAX);
+
+export default FindusersCont;

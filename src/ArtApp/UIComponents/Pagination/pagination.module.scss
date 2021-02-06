@@ -11,13 +11,19 @@
     align-items: center;
     height: 40px;
     margin-left: 16px;
-    .item {
+    .page {
       width: 20px;
       height: 20px;
       margin-right: 4px;
-      &:last-child {
-        margin-right: 0;
-      }
+    }
+    .prev {
+      width: 50px;
+      height: 20px;
+      margin-right: 4px;
+    }
+    .next {
+      width: 50px;
+      height: 20px;
     }
   }
 }
