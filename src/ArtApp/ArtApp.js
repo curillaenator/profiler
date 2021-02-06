@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
+// import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { Provider, connect } from "react-redux";
 import { store } from "../Redux/store";
 import { logout } from "../Redux/Reducers/authReducer";
@@ -17,12 +18,12 @@ const App = (props) => {
   if (!isInitialized) return <Loader />;
 
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <HashRouter basename={process.env.PUBLIC_URL}>
       <div className="artapp">
         <Header {...dimProps} />
         <Content />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
