@@ -12,6 +12,8 @@ export const profileReducer = (state = initialState, action) => {
       return { ...state, user: action.user };
     case "SET-STATUS":
       return { ...state, status: action.userId };
+    case "PHOTO-SUCCESS":
+      return { ...state, user: { ...state.user, photos: action.photos } };
     default:
       return state;
   }
@@ -21,6 +23,7 @@ export const profileReducer = (state = initialState, action) => {
 
 const setUser = (user) => ({ type: "SET-USER", user });
 const setStatus = (userId) => ({ type: "SET-STATUS", userId });
+const updatePhotoSuccess = (photos) => ({ type: "PHOTO-SUCCESS", photos });
 
 // THUNKS
 
@@ -34,4 +37,9 @@ export const updateMyStatus = (status) => (dispatch) => {
   profileAPI
     .setMyStatus(status)
     .then((r) => r.resultCode === 0 && dispatch(setStatus(status)));
+};
+export const updatePhoto = (photos) => async (dispatch) => {
+  const resp = await profileAPI.updatePhoto(photos[0]);
+  console.log(resp);
+  resp.photos && dispatch(updatePhotoSuccess(resp.photos));
 };

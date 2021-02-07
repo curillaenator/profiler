@@ -13,15 +13,6 @@
   .info {
     display: flex;
     justify-content: space-between;
-    .avatar {
-      & > img {
-        width: 96px;
-        height: 96px;
-        flex-shrink: 0;
-        border-radius: 50%;
-        object-fit: cover;
-      }
-    }
     .metrics {
       width: calc(100% - 96px - 24px - 32px);
       .name {

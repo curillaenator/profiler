@@ -1,5 +1,6 @@
+import Avatar from "./Avatar/Avatar";
 import Loader from "../../../../UIComponents/Loader/Loader";
-import nullava from "../../../../../assets/images/nullAva.jpg";
+// import nullava from "../../../../../assets/images/nullAva.jpg";
 import Status from "./Status/Status";
 
 import styles from "./profile.module.scss";
@@ -27,16 +28,12 @@ function Profile(props) {
         />
       </div>
       <div className={styles.info}>
-        <div className={styles.avatar}>
-          <img
-            src={
-              props.user.photos.small === null
-                ? nullava
-                : props.user.photos.small
-            }
-            alt={props.user.fullName}
-          />
-        </div>
+        <Avatar
+          photo={props.user.photos.large}
+          fullname={props.user.fullName}
+          isOwner={!props.match.params.userId}
+          updatePhoto={props.updatePhoto}
+        />
         <div className={styles.metrics}>
           <div className={styles.name}>{props.user.fullName}</div>
 

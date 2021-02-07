@@ -26,4 +26,13 @@ export const profileAPI = {
     base.get(`profile/Status/${userId}`).then((r) => r.data),
   setMyStatus: (status) =>
     base.put("profile/status", { status }).then((r) => r.data),
+  updatePhoto: (photo) => {
+    const formData = new FormData();
+    formData.append("image", photo);
+    return base
+      .put("profile/photo", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((r) => r.data.data);
+  },
 };

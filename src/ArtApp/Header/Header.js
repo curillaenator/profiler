@@ -18,7 +18,7 @@ function Header(props) {
         {props.isAuth ? (
           <div className={styles.ava}>
             <img
-              src={props.ava === null ? nullAva : props.ava}
+              src={props.avatar === null ? nullAva : props.avatar}
               alt={props.login}
             />
             <div className={styles.logout}>

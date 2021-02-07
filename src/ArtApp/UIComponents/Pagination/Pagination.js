@@ -18,7 +18,7 @@ const Pagination = (props) => {
     quant - pageQuant >= 0 && setQuant(quant - pageQuant);
     props.pageHandler(quant - pageQuant + 1, quant - pageQuant);
   };
-  const handle = (pageNum, q = currentQuant) =>
+  const pageHandle = (pageNum, q = currentQuant) =>
     props.pageHandler(pageNum, q);
 
   const pages = new Array(pageQuant)
@@ -43,7 +43,7 @@ const Pagination = (props) => {
             <ButtonUI
               title={p}
               type={p === props.currentPage && "activated"}
-              handler={handle}
+              handler={pageHandle}
               handlerArgs={p}
               fontsize="10px"
             />

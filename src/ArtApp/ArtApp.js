@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 // import { BrowserRouter } from "react-router-dom";
-import { BrowserRouter, HashRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { Provider, connect } from "react-redux";
 import { store } from "../Redux/store";
 import { logout } from "../Redux/Reducers/authReducer";
@@ -19,7 +19,7 @@ const App = (props) => {
 
   return (
     // <BrowserRouter basename={process.env.PUBLIC_URL}>
-    <HashRouter >
+    <HashRouter>
       <div className="artapp">
         <Header {...dimProps} />
         <Content />
@@ -35,7 +35,7 @@ const mstp = (state) => ({
   search: state.ui.icons.search,
   isAuth: state.auth.isAuth,
   login: state.auth.login,
-  ava: state.auth.ava,
+  avatar: state.auth.ava,
   // FOR CONTENT
   // ...
 });
