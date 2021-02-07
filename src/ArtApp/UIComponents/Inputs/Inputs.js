@@ -12,9 +12,10 @@ export const Input = ({ input, meta, ...props }) => {
 };
 
 export const Textarea = ({ input, meta, ...props }) => {
+  // console.log({ ...meta });
+  const hasError = meta.touched && meta.error;
   return (
     <div className={styles.textarea}>
-      {meta.error && <p>{"* " + meta.error}</p>}
       <textarea
         {...input}
         {...props}
@@ -22,8 +23,10 @@ export const Textarea = ({ input, meta, ...props }) => {
           resize: props.resize,
           minHeight: props.minheight,
           maxHeight: props.maxheight,
+          textAlign: props.textalign,
         }}
       ></textarea>
+      {hasError && <p>{"* " + meta.error}</p>}
     </div>
   );
 };

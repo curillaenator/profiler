@@ -32,6 +32,7 @@ function NoteForm(props) {
           resize="vertical"
           minheight="46px"
           maxheight="8rem"
+          textalign="left"
         />
       </div>
 

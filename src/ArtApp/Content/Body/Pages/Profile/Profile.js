@@ -1,12 +1,16 @@
+import { useState } from "react";
 import Avatar from "./Avatar/Avatar";
+import Update from "./Update/Update";
 import Loader from "../../../../UIComponents/Loader/Loader";
-// import nullava from "../../../../../assets/images/nullAva.jpg";
 import Status from "./Status/Status";
+import ButtonUI from "../../../../UIComponents/ButtonUI/ButtonUI";
 
 import styles from "./profile.module.scss";
 
 function Profile(props) {
-  // console.log(props);
+  const [edit, setEdit] = useState(false);
+  const editMode = () => setEdit(!edit);
+
   if (!props.user) {
     return <Loader />;
   }
@@ -15,14 +19,13 @@ function Profile(props) {
     link: props.user.contacts[el],
     ico: props.icons[el],
   }));
-
   const mainpic =
     "https://d16yj43vx3i1f6.cloudfront.net/uploads/2019/12/main_0000_Vietnam_1200-1088x529.jpg";
   return (
     <div className={styles.profile}>
       <div className={styles.image}>
         <img
-          src={props.user.image === undefined ? mainpic : props.user.image}
+          src={props.user.image || mainpic}
           style={{ height: props.pictureHeight }}
           alt={props.user.fullName}
         />
@@ -38,9 +41,7 @@ function Profile(props) {
           <div className={styles.name}>{props.user.fullName}</div>
 
           <div className={styles.job}>
-            {props.user.lookingForAJobDescription === null
-              ? "Фронтэнд разработчик"
-              : props.user.lookingForAJobDescription}
+            {props.user.lookingForAJobDescription || "Фронтэнд разработчик"}
           </div>
 
           <div className={styles.socials}>
@@ -56,8 +57,24 @@ function Profile(props) {
           </div>
           <Status status={props.status} updateMyStatus={props.updateMyStatus} />
         </div>
-        <div className={styles.buttons}></div>
+        <div className={styles.update}>
+          <ButtonUI title="редактировать" fontsize="10px" handler={editMode} />
+        </div>
       </div>
+      <div className={styles.aboutMe}>
+        <h3>Обо мне:</h3>
+        {props.user.aboutMe}
+      </div>
+
+      {edit && (
+        <Update
+          ownerId={props.ownerId}
+          contacts={props.user.contacts}
+          user={props.user}
+          updateProfile={props.updateProfile}
+          editMode={editMode}
+        />
+      )}
     </div>
   );
 }

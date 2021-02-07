@@ -35,7 +35,8 @@ const mstp = (state) => ({
   search: state.ui.icons.search,
   isAuth: state.auth.isAuth,
   login: state.auth.login,
-  avatar: state.auth.ava,
+  avatarInit: state.auth.ava,
+  avatar: state.profile.user.photos.small,
   // FOR CONTENT
   // ...
 });

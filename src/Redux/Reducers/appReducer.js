@@ -21,7 +21,8 @@ const initializeSuccess = () => ({ type: "INITIALIZE" });
 // THUNKS
 
 export const initializeApp = () => (dispatch) => {
-  let getUserInfoPromise = dispatch(getUserInfo());
-  let allPromises = [getUserInfoPromise];
+  const getUserInfoPromise = dispatch(getUserInfo());
+ 
+  const allPromises = [getUserInfoPromise];
   Promise.all(allPromises).then(() => dispatch(initializeSuccess()));
 };

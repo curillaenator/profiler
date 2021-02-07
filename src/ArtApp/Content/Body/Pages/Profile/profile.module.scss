@@ -13,8 +13,11 @@
   .info {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 16px;
+    position: relative;
     .metrics {
-      width: calc(100% - 96px - 24px - 32px);
+      padding: 0 16px;
+      width: 100%;
       .name {
         font-weight: 800;
         font-size: 12px;
@@ -51,8 +54,23 @@
         }
       }
     }
-    .buttons {
-      width: 24px;
+    .update {
+      width: 128px;
+      height: 20px;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+  .aboutMe {
+    width: 100%;
+    border-top: 2px solid $post;
+    border-bottom: 2px solid $post;
+    padding: 8px;
+    & > h3 {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
     }
   }
 }

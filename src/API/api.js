@@ -21,7 +21,7 @@ export const authAPI = {
 };
 
 export const profileAPI = {
-  setProfile: (userId) => base.get(`profile/${userId}`).then((r) => r.data),
+  requestProfile: (userId) => base.get(`profile/${userId}`).then((r) => r.data),
   getStatus: (userId) =>
     base.get(`profile/Status/${userId}`).then((r) => r.data),
   setMyStatus: (status) =>
@@ -35,4 +35,6 @@ export const profileAPI = {
       })
       .then((r) => r.data.data);
   },
+  updateProfile: (userData) =>
+    base.put("/profile", userData).then((r) => r.data),
 };

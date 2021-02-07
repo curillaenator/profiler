@@ -37,13 +37,14 @@
   width: 100%;
   height: 100%;
   & > p {
+    text-align: center;
     font-size: 10px;
     color: $danger;
   }
   & > textarea {
     @include font;
     outline: none;
-    border: none;
+    border: 2px solid $post;
     border-radius: 8px;
     padding: 8px;
   }

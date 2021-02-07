@@ -34,10 +34,10 @@ const afterLogout = (nullUser) => ({ type: AFTERLOGOUT, nullUser });
 // THUNKS
 
 export const getUserInfo = () => (dispatch) => {
-  return authAPI.isAuth().then((r1) => {
-    if (r1.resultCode === 0) {
-      dispatch(getUserData(r1.data));
-      authAPI.getAva(r1.data.id).then((r2) => dispatch(getUserAva(r2)));
+  return authAPI.isAuth().then((resp) => {
+    if (resp.resultCode === 0) {
+      dispatch(getUserData(resp.data));
+      authAPI.getAva(resp.data.id).then((r2) => dispatch(getUserAva(r2)));
     }
   });
 };

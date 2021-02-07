@@ -13,6 +13,7 @@ import {
   requestStatus,
   updateMyStatus,
   updatePhoto,
+  updateProfile,
 } from "../../../../../Redux/Reducers/profileReducer";
 
 const ProfileAJAX = (props) => {
@@ -45,6 +46,7 @@ export const ProfileCont = compose(
     requestStatus,
     updateMyStatus,
     updatePhoto,
+    updateProfile,
   }),
   withRouter
 )(ProfileAJAX);

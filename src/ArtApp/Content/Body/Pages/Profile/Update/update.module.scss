@@ -1,0 +1,62 @@
+@import "../../../../../../colors.scss";
+
+.update {
+  width: 100%;
+  margin-top: 16px;
+  padding: 16px;
+  border: 2px solid $post;
+  border-radius: 8px;
+  & > h2 {
+    text-align: center;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & > h3 {
+    text-align: center;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+  .input {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  .checkbox {
+    margin-bottom: 16px;
+  }
+  .textarea {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  .contacts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    .contact {
+      width: calc(50% - 4px);
+      margin-bottom: 8px;
+    }
+  }
+  .buttons {
+    display: flex;
+    justify-content: center;
+    .submit {
+      width: 256px;
+      height: 40px;
+      margin-right: 16px;
+    }
+    .erase {
+      width: 96px;
+      height: 40px;
+    }
+  }
+}
