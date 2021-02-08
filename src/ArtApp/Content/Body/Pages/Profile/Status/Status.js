@@ -5,7 +5,7 @@ const Status = (props) => {
   const [editMode, setEditMode] = useState(false);
   const [status, setStatus] = useState(props.status);
 
-  const editModeON = () => setEditMode(true);
+  const editModeON = () => props.isOwner && setEditMode(true);
   const editModeOFF = () => {
     setEditMode(false);
     props.updateMyStatus(status); //Обновление статуса через PUT
@@ -26,7 +26,7 @@ const Status = (props) => {
         />
       ) : (
         <div className={styles.string} onDoubleClick={editModeON}>
-          {props.status || "напиши что нибудь"}
+          {props.status || (props.isOwner && "напиши что нибудь")}
         </div>
       )}
     </div>

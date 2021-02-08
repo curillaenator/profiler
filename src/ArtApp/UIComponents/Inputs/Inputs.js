@@ -4,7 +4,7 @@ export const Input = ({ input, meta, ...props }) => {
   // console.log({ ...meta });
   const hasError = meta.touched && meta.error;
   return (
-    <div className={styles.input + " " + (hasError ? styles.inputError : "")}>
+    <div className={styles.input + " " + (hasError && styles.inputError)}>
       <input {...input} {...props} />
       {hasError && <p>{"* " + meta.error}</p>}
     </div>
@@ -15,7 +15,7 @@ export const Textarea = ({ input, meta, ...props }) => {
   // console.log({ ...meta });
   const hasError = meta.touched && meta.error;
   return (
-    <div className={styles.textarea}>
+    <div className={styles.textarea + ' ' + (hasError && styles.textareaError)}>
       <textarea
         {...input}
         {...props}

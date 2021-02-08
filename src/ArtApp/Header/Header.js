@@ -5,7 +5,7 @@ import nullAva from "../../assets/images/nullAva.jpg";
 import styles from "./header.module.scss";
 
 function Header(props) {
-  const { avatar, avatarInit, logout, search } = props;
+  const { avatarInit, logout, search } = props;
   return (
     <div className={styles.header}>
       <div className={styles.pad}>
@@ -19,7 +19,7 @@ function Header(props) {
 
         {props.isAuth ? (
           <div className={styles.ava}>
-            <img src={avatar || avatarInit || nullAva} alt={props.login} />
+            <img src={avatarInit || nullAva} alt={props.login} />
             <div className={styles.logout}>
               <ButtonUI title="выйти" type="secondary" handler={logout} />
             </div>

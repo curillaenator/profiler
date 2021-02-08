@@ -18,6 +18,7 @@
     border-radius: 8px;
     border: 2px solid $post;
     outline: none;
+    padding: 0 8px;
     &:focus {
       border: 2px solid $primary;
     }
@@ -47,5 +48,13 @@
     border: 2px solid $post;
     border-radius: 8px;
     padding: 8px;
+    &:focus {
+      border: 2px solid $primary;
+    }
+  }
+}
+.textareaError {
+  & > textarea {
+    border: 2px solid $danger;
   }
 }

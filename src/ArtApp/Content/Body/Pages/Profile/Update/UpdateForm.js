@@ -61,8 +61,9 @@ const UpdateForm = (props) => {
           name="lookingForAJob"
           type="checkbox"
           component="input"
-          // value={props.user.lookingForAJob}
-        />Да
+          initialValue={props.user.lookingForAJob}
+        />
+        Да
       </div>
 
       <h3>Расскажите кратко о себе</h3>
@@ -94,6 +95,7 @@ const UpdateForm = (props) => {
             }
           />
         </div>
+
         <div className={styles.erase}>
           <ButtonUI
             title="очистить"

@@ -3,6 +3,7 @@ import { Form } from "react-final-form";
 import UpdateForm from "./UpdateForm";
 
 import styles from "./update.module.scss";
+import ButtonUI from "../../../../../UIComponents/ButtonUI/ButtonUI";
 
 const Update = (props) => {
   //   console.log(props);
@@ -16,9 +17,6 @@ const Update = (props) => {
     });
 
     formData.contacts = contactsUpd;
-    formData.lookingForAJob === undefined
-      ? (formData.lookingForAJob = false)
-      : (formData.lookingForAJob = true);
     formData.userId = props.ownerId;
 
     // request server for update
@@ -26,10 +24,13 @@ const Update = (props) => {
       .updateProfile(formData)
       .then((r) => r.resultCode === 0 && props.editMode()); // if ok, close form
   };
-  
+
   return (
     <div className={styles.update}>
       <h2>Обновить данные профиля</h2>
+      <div className={styles.cancel}>
+        <ButtonUI title="отмена" type="secondary" handler={props.editMode} />
+      </div>
       <Form
         onSubmit={onSubmit}
         render={({ handleSubmit, values, submitError, form, pristine }) => (
@@ -41,6 +42,7 @@ const Update = (props) => {
             submitError={submitError}
             ownerId={props.ownerId}
             user={props.user}
+            editMode={props.editMode}
           />
         )}
       />

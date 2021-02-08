@@ -36,7 +36,7 @@ const mstp = (state) => ({
   isAuth: state.auth.isAuth,
   login: state.auth.login,
   avatarInit: state.auth.ava,
-  avatar: state.profile.user.photos.small,
+  // avatar: state.profile.user.photos.small,
   // FOR CONTENT
   // ...
 });
