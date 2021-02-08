@@ -1,1 +1,0 @@
-{"version":3,"sources":["ArtApp/Content/Body/Pages/Dialogs.js"],"names":["Dialogs"],"mappings":"wHAGeA,UAHf,WACI,OAAO","file":"static/js/4.cb291234.chunk.js","sourcesContent":["function Dialogs() {\r\n    return <div>Dialogs</div>\r\n}\r\nexport default Dialogs;"],"sourceRoot":""}
