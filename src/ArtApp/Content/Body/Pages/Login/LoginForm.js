@@ -1,7 +1,6 @@
 import { Field } from "react-final-form";
 import { Input } from "../../../../UIComponents/Inputs/Inputs";
 import ButtonUI from "../../../../UIComponents/ButtonUI/ButtonUI";
-
 import {
   required,
   minLength,
@@ -37,6 +36,20 @@ const LoginForm = (props) => {
         <Field name="rememberMe" type="checkbox" component="input" />
         Запомнить меня
       </div>
+
+      {props.submitError && props.captcha && (
+        <div className={styles.captcha}>
+          <img src={props.captcha} alt="captcha" />
+          <div className={styles.input}>
+            <Field
+              name="captcha"
+              placeholder="введите символы"
+              component={Input}
+              validate={required}
+            />
+          </div>
+        </div>
+      )}
 
       <div className={styles.submit}>
         <ButtonUI

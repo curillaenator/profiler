@@ -1,16 +1,16 @@
 import { connect } from "react-redux";
 import { Form } from "react-final-form";
 import { FORM_ERROR } from "final-form";
-import { login } from "../../../../../Redux/Reducers/authReducer";
+import { login, getCaptcha } from "../../../../../Redux/Reducers/authReducer";
 import { Redirect } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import styles from "./login.module.scss";
 
-
 const Login = (props) => {
   const onSubmit = (formData) => {
     return props.login(formData).then((r) => {
-      if (r.resultCode !== 0) return { [FORM_ERROR]: r.messages[0] };
+      r.resultCode === 10 && props.getCaptcha();
+      return r.resultCode !== 0 && { [FORM_ERROR]: r.messages[0] };
     });
   };
 
@@ -27,6 +27,7 @@ const Login = (props) => {
             pristine={pristine}
             values={values}
             submitError={submitError}
+            captcha={props.captcha}
           />
         )}
       />
@@ -37,6 +38,7 @@ const Login = (props) => {
 const mstp = (state) => ({
   isAuth: state.auth.isAuth,
   authMessage: state.auth.authMessage,
+  captcha: state.auth.captcha,
 });
 
-export default connect(mstp, { login })(Login);
+export default connect(mstp, { login, getCaptcha })(Login);

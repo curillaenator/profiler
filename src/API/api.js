@@ -20,6 +20,10 @@ export const authAPI = {
   logout: () => base.delete("auth/login").then((r) => r.data),
 };
 
+export const securityAPI = {
+  getCaptcha: () => base.get("/security/get-captcha-url").then((r) => r.data),
+};
+
 export const profileAPI = {
   requestProfile: (userId) => base.get(`profile/${userId}`).then((r) => r.data),
   getStatus: (userId) =>
