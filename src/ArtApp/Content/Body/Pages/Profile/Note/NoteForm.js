@@ -18,8 +18,8 @@ function NoteForm(props) {
           placeholder="Тайтл"
           component={Textarea}
           resize="none"
-          minheight="32px"
-          maxheight="32px"
+          minheight="36px"
+          maxheight="36px"
           validate={maxLength(15)}
         />
       </div>

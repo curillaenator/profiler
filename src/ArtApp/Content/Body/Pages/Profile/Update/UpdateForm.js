@@ -11,15 +11,18 @@ import {
 import styles from "./update.module.scss";
 
 const Contacts = (props) => {
+  // console.log(props);
   return (
     <div className={styles.contacts}>
       {Object.keys(props.contacts).map((c) => (
         <div className={styles.contact} key={c}>
+          {props.icons[c]}
           <Field
-            name={c}
+            name={`contacts.${c}`}
             placeholder={c}
             component={Input}
             initialValue={props.contacts[c]}
+            padding={"0 8px 0 36px"}
           />
         </div>
       ))}
@@ -84,7 +87,7 @@ const UpdateForm = (props) => {
 
       <h3>Ваши контакты</h3>
 
-      <Contacts contacts={props.user.contacts} />
+      <Contacts contacts={props.user.contacts} icons={props.icons} />
 
       <div className={styles.buttons}>
         <div className={styles.submit}>
@@ -100,11 +103,15 @@ const UpdateForm = (props) => {
           <ButtonUI
             title="очистить"
             type="secondary"
-            disabled={props.pristine}
+            // disabled={props.pristine}
             handler={props.form.reset}
           />
         </div>
       </div>
+
+      {/* {props.submitError && ( */}
+      <div className={styles.formError}>{props.submitError}</div>
+      {/* )} */}
     </form>
   );
 };

@@ -2,12 +2,13 @@
 
 .note {
   // background-color: $post;
-  border: 2px solid $post;
-  border-radius: 8px;
+  border-top: 2px solid $post;
+  border-bottom: 2px solid $post;
+  // border-radius: 8px;
   margin-bottom: 16px;
   .title {
-      display: flex;
-      align-items: center;
+    display: flex;
+    align-items: center;
     & > h3 {
       font-size: 12px;
       font-weight: 800;
@@ -16,7 +17,7 @@
       padding: 8px;
     }
     & > p {
-        font-size: 10px;
+      font-size: 10px;
     }
   }
   & > p {

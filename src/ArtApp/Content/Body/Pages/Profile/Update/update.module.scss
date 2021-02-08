@@ -51,16 +51,27 @@
     justify-content: space-between;
     margin-bottom: 8px;
     .contact {
-      width: calc(50% - 4px);
+      // display: flex;
+      // align-items: center;
+      position: relative;
+      width: calc(50% - 8px);
       height: 40px;
       margin-bottom: 8px;
+      & > svg {
+        position: absolute;
+        top: 50%;
+        left: 8px;
+        transform: translateY(-50%);
+        margin-right: 8px;
+        fill: $primary;
+      }
     }
   }
   .buttons {
     display: flex;
     justify-content: center;
     .submit {
-      width: 256px;
+      width: 220px;
       height: 40px;
       margin-right: 16px;
     }
@@ -68,5 +79,12 @@
       width: 96px;
       height: 40px;
     }
+  }
+  .formError {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: $danger;
   }
 }

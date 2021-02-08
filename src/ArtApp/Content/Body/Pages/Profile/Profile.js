@@ -1,13 +1,12 @@
 import { useState } from "react";
 import ProfileData from "./ProfileData";
+import { PrimaryDivider } from "../../../../UIComponents/Dividers/Dividers";
 import Update from "./Update/Update";
 import Loader from "../../../../UIComponents/Loader/Loader";
 
 import styles from "./profile.module.scss";
 
 function Profile(props) {
-  // console.log(props);
-
   const [edit, setEdit] = useState(false);
   const editMode = () => setEdit(!edit);
 
@@ -26,6 +25,8 @@ function Profile(props) {
           alt={props.user.fullName}
         />
       </div>
+      <PrimaryDivider height="20px" />
+
       {edit ? (
         <Update
           ownerId={props.ownerId}
@@ -33,21 +34,17 @@ function Profile(props) {
           user={props.user}
           updateProfile={props.updateProfile}
           editMode={editMode}
+          icons={props.icons}
         />
       ) : (
         <ProfileData
-          socials={props.socials}
-          photo={props.user.photos.large}
-          fullname={props.user.fullName}
+          user={props.user}
           isOwner={!props.match.params.userId}
           updatePhoto={props.updatePhoto}
-          lookingForAJobDescription={props.user.lookingForAJobDescription}
           status={props.status}
           updateMyStatus={props.updateMyStatus}
           editMode={editMode}
-          contacts={props.user.contacts}
           icons={props.icons}
-          aboutMe={props.user.aboutMe}
         />
       )}
     </div>

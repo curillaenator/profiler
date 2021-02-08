@@ -1,9 +1,9 @@
 @import "../../../../../colors.scss";
 
 .profile {
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   .image {
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     & > img {
       width: 100%;
       border-radius: 8px;
@@ -23,9 +23,17 @@
         padding: 0 16px;
         width: 100%;
         .name {
-          font-weight: 800;
-          font-size: 12px;
-          text-transform: uppercase;
+          display: flex;
+          align-items: center;
+          & > h3 {
+            font-weight: 800;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-right: 8px;
+          }
+          & > p {
+            font-size: 12px;
+          }
         }
         .job {
           font-size: 14px;
@@ -71,6 +79,7 @@
         font-size: 12px;
         font-weight: 800;
         text-transform: uppercase;
+        margin-bottom: 8px;
       }
     }
   }

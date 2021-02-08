@@ -7,14 +7,14 @@ const initialState = {
     lookingForAJobDescription: null,
     fullName: null,
     contacts: {
-      facebook: null,
-      website: null,
-      vk: null,
-      twitter: null,
-      instagram: null,
-      youtube: null,
-      github: null,
-      mainLink: null,
+      facebook: null, //
+      website: null, //
+      vk: null, //
+      twitter: null, //
+      instagram: null, //
+      youtube: null, //
+      github: null, //
+      mainLink: null, //
     },
     aboutMe: null,
     photos: {
@@ -22,7 +22,6 @@ const initialState = {
       large: null,
     },
   },
-  socials: ["github", "facebook", "vk", "instagram", "youtube"],
   status: "",
 };
 

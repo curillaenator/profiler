@@ -1,9 +1,10 @@
 @import "../../../../../../colors.scss";
 
 .form {
-  background-color: $post;
+  // background-color: $post;
   margin-bottom: 16px;
   padding: 8px;
+  border: 2px solid $post;
   border-radius: 8px;
   .title {
     margin-bottom: 4px;

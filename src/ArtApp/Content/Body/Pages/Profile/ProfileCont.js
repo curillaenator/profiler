@@ -33,7 +33,6 @@ const ProfileAJAX = (props) => {
 const mapStateToProps = (state) => ({
   ownerId: authSel.getAuthId(state),
   user: profileSel.getUser(state),
-  socials: profileSel.getSocials(state),
   status: profileSel.getStatus(state),
   pictureHeight: state.ui.menuParams.height,
   icons: uiSel.getIcons(state),
