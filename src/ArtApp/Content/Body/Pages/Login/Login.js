@@ -18,7 +18,7 @@ const Login = (props) => {
 
   return (
     <div className={styles.login}>
-      <h2>Добро пожаловать в Profiler</h2>
+      <h2>Для продолжения работы выполните вход</h2>
       <Form
         onSubmit={onSubmit}
         render={({ handleSubmit, pristine, values, submitError }) => (

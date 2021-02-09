@@ -1,0 +1,50 @@
+@import "../../../../../colors.scss";
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 24px;
+  position: relative;
+  margin-bottom: 24px;
+  & > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    z-index: -1;
+  }
+  & > h2 {
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 16px;
+    color: $primary;
+  }
+  .intro {
+    margin-bottom: 8px;
+    & > h3 {
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    & > p {
+      margin-bottom: 8px;
+    }
+    .tech {
+      text-align: left;
+      margin-bottom: 8px;
+    }
+  }
+  .testAccount {
+    text-align: center;
+    & > h3 {
+      margin-bottom: 16px;
+    }
+  }
+}

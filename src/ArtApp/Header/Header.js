@@ -9,7 +9,7 @@ function Header(props) {
   return (
     <div className={styles.header}>
       <div className={styles.pad}>
-        <h1>ArtApp</h1>
+        <h1>PROФайлер</h1>
       </div>
       <div className={styles.pad}>
         <NavLink to="/findusers" className={styles.find}>

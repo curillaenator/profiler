@@ -1,8 +1,15 @@
 @import "../../../colors.scss";
 
-.blueFat {
+@mixin comomn {
   width: 100%;
   margin-bottom: 16px;
-  background-color: $postLight;
   border-radius: 8px;
+}
+.primary {
+  @include comomn;
+  background-color: $primary;
+}
+.secondary {
+  @include comomn;
+  background-color: $postLight;
 }

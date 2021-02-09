@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ProfileData from "./ProfileData";
-import { PrimaryDivider } from "../../../../UIComponents/Dividers/Dividers";
+import { SecondaryDivider } from "../../../../UIComponents/Dividers/Dividers";
 import Update from "./Update/Update";
 import Loader from "../../../../UIComponents/Loader/Loader";
 
@@ -25,7 +25,7 @@ function Profile(props) {
           alt={props.user.fullName}
         />
       </div>
-      <PrimaryDivider height="20px" />
+      <SecondaryDivider height="20px" />
 
       {edit ? (
         <Update

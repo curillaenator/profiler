@@ -7,6 +7,7 @@ import { logout } from "../Redux/Reducers/authReducer";
 import { initializeApp } from "./../Redux/Reducers/appReducer";
 import Header from "./Header/Header";
 import Content from "./Content/Content";
+import { PrimaryDivider } from "./UIComponents/Dividers/Dividers";
 import Loader from "./UIComponents/Loader/Loader";
 
 import "../index.scss";
@@ -23,6 +24,7 @@ const App = (props) => {
       <div className="artapp">
         <Header {...dimProps} />
         <Content />
+        <PrimaryDivider height="40px" />
       </div>
     </HashRouter>
   );
@@ -36,7 +38,6 @@ const mstp = (state) => ({
   isAuth: state.auth.isAuth,
   login: state.auth.login,
   avatarInit: state.auth.ava,
-  // avatar: state.profile.user.photos.small,
   // FOR CONTENT
   // ...
 });

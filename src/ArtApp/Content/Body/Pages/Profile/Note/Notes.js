@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Form } from "react-final-form";
 import ButtonUI from "../../../../../UIComponents/ButtonUI/ButtonUI";
-import { PrimaryDivider } from "../../../../../UIComponents/Dividers/Dividers";
+import { SecondaryDivider } from "../../../../../UIComponents/Dividers/Dividers";
 import Note from "./Note";
 import NoteForm from "./NoteForm";
 
@@ -17,7 +17,7 @@ function Posts(props) {
   };
   return (
     <div className={styles.notes}>
-      <PrimaryDivider height="20px" />
+      <SecondaryDivider height="20px" />
 
       <div className={styles.header}>
         <div className={styles.title}>Мои заметки</div>
