@@ -1,0 +1,2 @@
+(this.webpackJsonpprofiler=this.webpackJsonpprofiler||[]).push([[6],{108:function(r,e,i){"use strict";i.r(e);var s=i(0);e.default=function(){return Object(s.jsx)("div",{children:"Works"})}}}]);
+//# sourceMappingURL=6.3c1ddead.chunk.js.map

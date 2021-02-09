@@ -1,0 +1,1 @@
+{"version":3,"sources":["ArtApp/Content/Body/Pages/Skils.js"],"names":["Skills"],"mappings":"wHAGeA,UAHf,WACI,OAAO","file":"static/js/5.3e521fa2.chunk.js","sourcesContent":["function Skills() {\r\n    return <div>Skills</div>\r\n}\r\nexport default Skills;"],"sourceRoot":""}

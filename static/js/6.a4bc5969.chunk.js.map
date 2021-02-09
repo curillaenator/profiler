@@ -1,1 +1,0 @@
-{"version":3,"sources":["ArtApp/Content/Body/Pages/Works.js"],"names":["Works"],"mappings":"wHAGeA,UAHf,WACI,OAAO","file":"static/js/6.a4bc5969.chunk.js","sourcesContent":["function Works() {\r\n    return <div>Works</div>\r\n}\r\nexport default Works;"],"sourceRoot":""}
