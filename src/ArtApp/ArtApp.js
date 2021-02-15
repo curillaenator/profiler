@@ -13,6 +13,19 @@ import Loader from "./UIComponents/Loader/Loader";
 import "../index.scss";
 
 const App = (props) => {
+  //server Error
+  const catchRejectedAsyncs = (e) => {
+    alert("Ошибка сервера: " + e.reason);
+  };
+
+  useEffect(() => {
+    window.addEventListener("unhandledrejection", catchRejectedAsyncs);
+    return window.removeEventListener(
+      "unhandledrejection",
+      catchRejectedAsyncs
+    );
+  });
+
   const { initializeApp, isInitialized, ...dimProps } = props;
   useEffect(() => initializeApp(), [initializeApp]);
 
