@@ -9,7 +9,7 @@ import { profileReducer } from "./Reducers/profileReducer";
 import { notesReducer } from "./Reducers/notesReducer";
 import { authReducer } from "./Reducers/authReducer";
 
-const reducers = combineReducers({
+const rootReducer = combineReducers({
   app: appReducer,
   welcome: welcomeReducer,
   ui: uiReducer,
@@ -19,12 +19,16 @@ const reducers = combineReducers({
   auth: authReducer,
 });
 
+type RootReducerType = typeof rootReducer;
+export type AppStateType = ReturnType<RootReducerType>
+
+// @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const store = createStore(
-  reducers,
+  rootReducer,
   composeEnhancers(applyMiddleware(thunk))
 );
+// export const store = createStore(rootReducer, applyMiddleware(thunk));
 
-// export const store = createStore(reducers, applyMiddleware(thunk));
-
+// @ts-ignore
 window.store = store;
