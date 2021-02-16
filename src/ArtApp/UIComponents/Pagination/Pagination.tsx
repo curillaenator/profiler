@@ -1,34 +1,49 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Loader from "../Loader/Loader";
 import ButtonUI from "../ButtonUI/ButtonUI";
 import styles from "./pagination.module.scss";
 
-const Pagination = (props) => {
-  const { pageQuant, currentQuant } = props;
+type props = {
+  pageQuant: number; //qty of shown pages' buttons
+  currentQuant: number; //qty of pages skiped
+  totalUsers: number;
+  pageSize: number; // qty of users per page
+  isFetching: boolean; // is now waiting for responce from server
+  currentPage: number; // selected page to show
+  pageHandler: (pageNum:number, quant:number ) => void;
+};
 
-  const totalPages = Math.ceil(props.totalUsers / props.pageSize);
+const Pagination: React.FC<props> = ({
+  pageQuant,
+  currentQuant,
+  totalUsers,
+  pageSize,
+  isFetching,
+  currentPage,
+  pageHandler,
+}) => {
+  const totalPages = Math.ceil(totalUsers / pageSize);
 
   const [quant, setQuant] = useState(currentQuant);
-  
+
   const pagesIncr = () => {
     quant + pageQuant < totalPages && setQuant(quant + pageQuant);
-    props.pageHandler(quant + pageQuant + 1, quant + pageQuant);
+    pageHandler(quant + pageQuant + 1, quant + pageQuant);
   };
   const pagesDecr = () => {
     quant - pageQuant >= 0 && setQuant(quant - pageQuant);
-    props.pageHandler(quant - pageQuant + 1, quant - pageQuant);
+    pageHandler(quant - pageQuant + 1, quant - pageQuant);
   };
-  const pageHandle = (pageNum, q = currentQuant) =>
-    props.pageHandler(pageNum, q);
+  const handlePageSelect = (pageNum: number, q = currentQuant) => pageHandler(pageNum, q);
 
-  const pages = new Array(pageQuant)
+  const pages: Array<number> = new Array(pageQuant)
     .fill(1)
     .filter((p, i) => p + i + quant <= totalPages)
     .map((p, i) => p + i + quant);
 
   return (
     <div className={styles.pagination_track}>
-      {props.isFetching && <Loader />}
+      {isFetching && <Loader />}
       <div className={styles.pagination}>
         <div className={styles.prev}>
           <ButtonUI
@@ -42,8 +57,8 @@ const Pagination = (props) => {
           <div className={styles.page} key={p}>
             <ButtonUI
               title={p}
-              type={p === props.currentPage && "activated"}
-              handler={pageHandle}
+              type={p === currentPage && "activated"}
+              handler={handlePageSelect}
               handlerArgs={p}
               fontsize="10px"
             />
