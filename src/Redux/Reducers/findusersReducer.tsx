@@ -1,4 +1,5 @@
 import { usersAPI } from "../../API/api";
+import { SingleUser } from "../../Types/Types"; // Types
 import * as flow from "../ReduxUtils/findusersFlow";
 
 const FOLLOW = "findusersReducer/FOLLOW";
@@ -10,18 +11,6 @@ const SET_CURRENTPAGE = "findusersReducer/SET_CURRENTPAGE";
 const SET_CURRENT_QUANTIZE = "findusersReducer/SET_CURRENT_QUANTIZE";
 const IS_FETCHING = "findusersReducer/IS_FETCHING";
 
-type Photos = {
-  small: string | null;
-  large: string | null;
-};
-type SingleUser = {
-  name: string;
-  id: number;
-  uniqueUrlName: string | null;
-  photos: Photos;
-  status: string | null;
-  followed: boolean;
-};
 const initialState = {
   users: [] as Array<SingleUser>,
   pageSize: 50,
