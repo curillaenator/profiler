@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { FC } from "react";
 import Loader from "../Loader/Loader";
 import ButtonUI from "../ButtonUI/ButtonUI";
 import styles from "./pagination.module.scss";
@@ -10,10 +10,10 @@ type props = {
   pageSize: number; // qty of users per page
   isFetching: boolean; // is now waiting for responce from server
   currentPage: number; // selected page to show
-  pageHandler: (pageNum:number, quant:number ) => void;
+  pageHandler: (pageNum: number, quant: number) => void;
 };
 
-const Pagination: React.FC<props> = ({
+const Pagination: FC<props> = ({
   pageQuant,
   currentQuant,
   totalUsers,
@@ -22,24 +22,21 @@ const Pagination: React.FC<props> = ({
   currentPage,
   pageHandler,
 }) => {
-  const totalPages = Math.ceil(totalUsers / pageSize);
+  const ttlPgs = Math.ceil(totalUsers / pageSize);
+  const Q = currentQuant;
 
-  const [quant, setQuant] = useState(currentQuant);
+  const pagesIncr = () =>
+    Q + pageQuant < ttlPgs && pageHandler(Q + pageQuant + 1, Q + pageQuant);
 
-  const pagesIncr = () => {
-    quant + pageQuant < totalPages && setQuant(quant + pageQuant);
-    pageHandler(quant + pageQuant + 1, quant + pageQuant);
-  };
-  const pagesDecr = () => {
-    quant - pageQuant >= 0 && setQuant(quant - pageQuant);
-    pageHandler(quant - pageQuant + 1, quant - pageQuant);
-  };
-  const handlePageSelect = (pageNum: number, q = currentQuant) => pageHandler(pageNum, q);
+  const pagesDecr = () =>
+    Q - pageQuant >= 0 && pageHandler(Q - pageQuant + 1, Q - pageQuant);
+
+  const handlePageSelect = (pageNum: number, q = Q) => pageHandler(pageNum, q);
 
   const pages: Array<number> = new Array(pageQuant)
     .fill(1)
-    .filter((p, i) => p + i + quant <= totalPages)
-    .map((p, i) => p + i + quant);
+    .filter((page, i) => page + i + Q <= ttlPgs)
+    .map((page, i) => page + i + Q);
 
   return (
     <div className={styles.pagination_track}>
@@ -49,7 +46,7 @@ const Pagination: React.FC<props> = ({
           <ButtonUI
             title="пред."
             handler={pagesDecr}
-            disabled={quant === 0}
+            disabled={Q === 0}
             fontsize="10px"
           />
         </div>
@@ -68,7 +65,7 @@ const Pagination: React.FC<props> = ({
           <ButtonUI
             title="след."
             handler={pagesIncr}
-            disabled={currentQuant + pageQuant >= totalPages}
+            disabled={Q + pageQuant >= ttlPgs}
             fontsize="10px"
           />
         </div>
