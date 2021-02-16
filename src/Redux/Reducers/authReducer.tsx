@@ -5,23 +5,16 @@ const USERAVA: string = "authReducer/USER-AVA";
 const AFTERLOGOUT: string = "authReducer/AFTER-LOGOUT";
 const GETCAPTCHA: string = "authReducer/GETCAPTCHA";
 
-type InitialState = {
-  id: number | null;
-  email: string | null;
-  login: string | null;
-  isAuth: boolean;
-  ava: string | null;
-  captcha: string | null;
+const initialState = {
+  id: null as number | null,
+  email: null as string | null,
+  login: null as string | null,
+  isAuth: false,
+  ava: null as string | null,
+  captcha: null as string | null,
 };
 
-const initialState: InitialState = {
-  id: null,
-  email: null,
-  login: null,
-  isAuth: false,
-  ava: null,
-  captcha: null,
-};
+type InitialState = typeof initialState
 
 export const authReducer = (
   state = initialState,
@@ -102,7 +95,7 @@ export const getUserInfo = () => (dispatch: any) => {
 
 type Login = {
   email: string;
-  passwodr: string;
+  password: string;
   rememberMe?: boolean;
 };
 

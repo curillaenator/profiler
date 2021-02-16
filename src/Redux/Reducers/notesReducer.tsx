@@ -1,3 +1,15 @@
+type Note = {
+  id: string;
+  date: string;
+  title: string;
+  text: string;
+};
+type Options = {
+  year: string;
+  month: string;
+  day: string;
+};
+
 const initialState = {
   notes: [
     {
@@ -14,17 +26,22 @@ const initialState = {
       text:
         "Москва – столица России, многонациональный город на Москве-реке в западной части страны.",
     },
-  ],
+  ] as Array<Note>,
 };
+type InitialState = typeof initialState;
 
-const NOTE_CREATE = "notesReducer/NOTE-CREATE";
-const NOTE_DELETE = "notesReducer/NOTE-DELETE";
+const NOTE_CREATE: string = "notesReducer/NOTE-CREATE";
+const NOTE_DELETE: string = "notesReducer/NOTE-DELETE";
 
-export const notesReducer = (state = initialState, action) => {
+export const notesReducer = (
+  state = initialState,
+  action: any
+): InitialState => {
   switch (action.type) {
     case NOTE_CREATE:
-      const idsArr = state.notes.map((p) => p.id);
-      const dater = (op) => new Date().toLocaleString("ru", op);
+      const idsArr: Array<number> = state.notes.map((p) => +p.id);
+      const dater = (opts: Options): string =>
+        new Date().toLocaleString("ru", opts);
       return {
         ...state,
         notes: [
@@ -38,11 +55,29 @@ export const notesReducer = (state = initialState, action) => {
         ],
       };
     case NOTE_DELETE:
-      return { ...state, notes: state.notes.filter((n) => n.id !== action.id) };
+      return {
+        ...state,
+        notes: state.notes.filter((note) => note.id !== action.id),
+      };
     default:
       return state;
   }
 };
 
-export const createNote = (note) => ({ type: NOTE_CREATE, note });
-export const deleteNote = (id) => ({ type: NOTE_DELETE, id });
+// ACTIONS
+
+type NoteInp = {
+  title: string;
+  text: string;
+};
+type CreateNote = { type: typeof NOTE_CREATE; note: NoteInp };
+export const createNote = (note: NoteInp): CreateNote => ({
+  type: NOTE_CREATE,
+  note,
+});
+
+type DeleteNote = { type: typeof NOTE_DELETE; id: string };
+export const deleteNote = (id: string): DeleteNote => ({
+  type: NOTE_DELETE,
+  id,
+});
