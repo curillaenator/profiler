@@ -1,41 +1,47 @@
 import { profileAPI } from "../../API/api";
-import { UserData } from "../../Types/Types";
+import { UserData, Photos } from "../../Types/Types";
+import { Dispatch } from "redux";
 
-const SET_USER: string = "profileReducer/SET_USER";
-const SET_STATUS: string = "profileReducer/SET_STATUS";
-const PHOTO_SUCCESS: string = "profileReducer/PHOTO_SUCCESS";
-const UPDATE_USER: string = "profileReducer/UPDATE_USER";
+const SET_USER = "profileReducer/SET_USER";
+const SET_STATUS = "profileReducer/SET_STATUS";
+const PHOTO_SUCCESS = "profileReducer/PHOTO_SUCCESS";
+const UPDATE_USER = "profileReducer/UPDATE_USER";
 
-const initialState = {
-  user: {
-    userId: null as number | null,
-    lookingForAJob: null as boolean | null,
-    lookingForAJobDescription: null as string | null,
-    fullName: null as string | null,
-    contacts: {
-      facebook: null as string | null,
-      website: null as string | null,
-      vk: null as string | null,
-      twitter: null as string | null,
-      instagram: null as string | null,
-      youtube: null as string | null,
-      github: null as string | null,
-      mainLink: null as string | null,
-    },
-    aboutMe: null as string | null,
-    photos: {
-      small: null as string | null,
-      large: null as string | null,
-    },
-  },
-  status: "" as string,
+type InitialState = {
+  user: UserData;
+  status: string;
 };
 
-type InitialState = typeof initialState;
+const initialState: InitialState = {
+  user: {
+    userId: null,
+    lookingForAJob: null,
+    lookingForAJobDescription: null,
+    fullName: null,
+    contacts: {
+      facebook: null,
+      website: null,
+      vk: null,
+      twitter: null,
+      instagram: null,
+      youtube: null,
+      github: null,
+      mainLink: null,
+    },
+    aboutMe: null,
+    photos: {
+      small: null,
+      large: null,
+    },
+  },
+  status: "",
+};
+
+type Actions = SetUser | SetStatus | UpdatePhotoSuccess | UpdateUser;
 
 export const profileReducer = (
   state = initialState,
-  action: any
+  action: Actions
 ): InitialState => {
   switch (action.type) {
     case SET_USER:
@@ -61,14 +67,13 @@ export const profileReducer = (
 };
 
 // ACTIONS
-type User = typeof initialState.user;
-type SetUser = { type: typeof SET_USER; user: User };
-const setUser = (user: User): SetUser => ({ type: SET_USER, user });
+
+type SetUser = { type: typeof SET_USER; user: UserData };
+const setUser = (user: UserData): SetUser => ({ type: SET_USER, user });
 
 type SetStatus = { type: typeof SET_STATUS; status: string };
 const setStatus = (status: string): SetStatus => ({ type: SET_STATUS, status });
 
-type Photos = typeof initialState.user.photos;
 type UpdatePhotoSuccess = { type: typeof PHOTO_SUCCESS; photos: Photos };
 const updatePhotoSuccess = (photos: Photos): UpdatePhotoSuccess => ({
   type: PHOTO_SUCCESS,
@@ -83,30 +88,38 @@ export const updateUser = (user: UserData): UpdateUser => ({
 
 // THUNKS
 
-export const requestProfile = (userId: number) => (dispatch: any) => {
-  profileAPI
-    .requestProfile(userId)
-    .then((resp: any) => dispatch(setUser(resp)));
+export const requestProfile = (userId: number) => async (
+  dispatch: Dispatch<Actions>
+) => {
+  const resp = await profileAPI.requestProfile(userId);
+  dispatch(setUser(resp));
 };
 
-// newUserData = initialState.user without photos
-export const updateProfile = (newUserData: any) => async (dispatch: any) => {
+export const updateProfile = (newUserData: UserData) => async (
+  dispatch: Dispatch<Actions>
+) => {
   const resp = await profileAPI.updateProfile(newUserData);
   resp.resultCode === 0 && dispatch(updateUser(newUserData));
   return resp;
 };
 
-export const requestStatus = (userId: number) => (dispatch: any) => {
-  profileAPI.getStatus(userId).then((resp: any) => dispatch(setStatus(resp)));
+export const requestStatus = (userId: number) => async (
+  dispatch: Dispatch<Actions>
+) => {
+  const resp = await profileAPI.getStatus(userId);
+  dispatch(setStatus(resp));
 };
 
-export const updateMyStatus = (status: string) => (dispatch: any) => {
-  profileAPI
-    .setMyStatus(status)
-    .then((resp: any) => resp.resultCode === 0 && dispatch(setStatus(status)));
+export const updateMyStatus = (status: string) => async (
+  dispatch: Dispatch<Actions>
+) => {
+  const resp = await profileAPI.setMyStatus(status);
+  resp.resultCode === 0 && dispatch(setStatus(status));
 };
 
-export const updatePhoto = (photoFiles: any) => async (dispatch: any) => {
+export const updatePhoto = (photoFiles: any) => async (
+  dispatch: Dispatch<Actions>
+) => {
   const resp = await profileAPI.updatePhoto(photoFiles[0]);
   resp.photos && dispatch(updatePhotoSuccess(resp.photos));
 };

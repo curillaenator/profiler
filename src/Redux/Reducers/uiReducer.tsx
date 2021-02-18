@@ -1,4 +1,6 @@
 import { MenuParams, MenuButtons } from "../../Types/Types";
+import { Dispatch } from "redux";
+import { AppStateType } from "../store";
 
 const MENU_HEGHT = "uiReducer/MENU_HEGHT";
 
@@ -144,6 +146,8 @@ const initialState: InitialState = {
   },
 };
 
+type ActionTypes = MenuHeight
+
 export const uiReducer = (state = initialState, action: any): InitialState => {
   switch (action.type) {
     case MENU_HEGHT:
@@ -168,8 +172,11 @@ const menuHeight = (height: number): MenuHeight => ({
 
 //THUNKs
 
-export const setMenuHeight = () => (dispatch: any) => {
-  const btnsQty = Object.keys(initialState.menuButtons).length;
+export const setMenuHeight = () => (
+  dispatch: Dispatch<ActionTypes>,
+  getState: () => AppStateType
+) => {
+  const btnsQty = Object.keys(getState().ui.menuButtons).length;
   const heightCalced = btnsQty * 40 + 16 * (btnsQty - 1);
   dispatch(menuHeight(heightCalced));
 };

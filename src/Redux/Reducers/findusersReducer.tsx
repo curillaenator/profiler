@@ -1,6 +1,7 @@
+import { Dispatch } from "redux";
 import { usersAPI } from "../../API/api";
-import { SingleUser } from "../../Types/Types"; // Types
-import * as flow from "../ReduxUtils/findusersFlow";
+import { SingleUser } from "../../Types/Types";
+// import { AppStateType } from "../store";
 
 const FOLLOW = "findusersReducer/FOLLOW";
 const UNFOLLOW = "findusersReducer/UNFOLLOW";
@@ -15,30 +16,41 @@ const initialState = {
   users: [] as Array<SingleUser>,
   pageSize: 50,
   pageQuant: 10, // sets qty of pages buttons in pagination
-  currentQuant: 0,
+  currentQuant: 0, // qty of skiped pages for paination show
   totalUsers: 0,
   currentPage: 1,
   isFetching: false,
   whileFollow: [] as Array<number>, // while fetching for follow disables follow button for particular id
 };
 type InitialState = typeof initialState;
+type Actions =
+  | Follow
+  | Unfollow
+  | WhileFollow
+  | SetTotalUsers
+  | SetUsers
+  | CurrentPage
+  | CurrentQuantize
+  | Fetching;
+
+type Set = { followed: boolean };
+const _followUser = (arr: Array<SingleUser>, id: number, set: Set) =>
+  arr.map((el: SingleUser) => (el.id === id ? { ...el, ...set } : el));
 
 export const findusersReducer = (
   state = initialState,
-  action: any
+  action: Actions
 ): InitialState => {
   switch (action.type) {
     case FOLLOW:
-      const followTrue = { followed: true };
       return {
         ...state,
-        users: flow.followUser(state.users, action.id, "id", followTrue),
+        users: _followUser(state.users, action.id, { followed: true }),
       };
     case UNFOLLOW:
-      const followFalse = { followed: false };
       return {
         ...state,
-        users: flow.followUser(state.users, action.id, "id", followFalse),
+        users: _followUser(state.users, action.id, { followed: false }),
       };
     case WHILE_FOLLOW:
       return {
@@ -106,25 +118,39 @@ const fetching = (fetch: boolean): Fetching => ({ type: IS_FETCHING, fetch });
 
 // THUNKS
 
-export const requestUsers = (page: number, pageSize: number) => (
-  dispatch: any
+export const requestUsers = (page: number, pageSize: number) => async (
+  dispatch: Dispatch<Actions>
+  // getState: () => AppStateType
 ) => {
   dispatch(fetching(true));
   dispatch(currentPage(page));
-  usersAPI.getUsers(page, pageSize).then((data: any) => {
-    dispatch(setTotalUsers(data.totalCount));
-    dispatch(setUsers(data.items));
-    dispatch(fetching(false));
-  });
+  let data = await usersAPI.getUsers(page, pageSize);
+  dispatch(setTotalUsers(data.totalCount));
+  dispatch(setUsers(data.items));
+  dispatch(fetching(false));
 };
 
-export const setCurrentPage = (page: number, q: number) => (dispatch: any) => {
+export const setCurrentPage = (page: number, q: number) => (
+  dispatch: Dispatch<Actions>
+) => {
   dispatch(currentPage(page));
   dispatch(currentQuantize(q));
 };
 
-export const follower = (id: number) => (dispatch: any) =>
-  flow.follow(id, dispatch, usersAPI.follow.bind(usersAPI), follow);
+const _followHelper = async (
+  id: number,
+  dispatch: Dispatch<Actions>,
+  api: any,
+  actionCreator: (userId: number) => Follow | Unfollow
+) => {
+  dispatch(whileFollow(id, true));
+  const data = await api(id);
+  if (data.resultCode === 0) dispatch(actionCreator(id));
+  dispatch(whileFollow(id, false));
+};
 
-export const unfollower = (id: number) => (dispatch: any) =>
-  flow.follow(id, dispatch, usersAPI.unfollow.bind(usersAPI), unfollow);
+export const follower = (id: number) => (dispatch: Dispatch<Actions>) =>
+  _followHelper(id, dispatch, usersAPI.follow.bind(usersAPI), follow);
+
+export const unfollower = (id: number) => (dispatch: Dispatch<Actions>) =>
+  _followHelper(id, dispatch, usersAPI.unfollow.bind(usersAPI), unfollow);

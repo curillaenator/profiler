@@ -16,7 +16,7 @@ type Props = {
 };
 
 const Usercard: FC<Props> = (props) => {
-  console.log(props);
+  // console.log(props);
 
   const followHandler = () =>
     props.user.followed

@@ -14,25 +14,22 @@ export type MenuButtons = {
 // PROFILE
 
 export type UserData = {
-  userId: number;
-  lookingForAJob: boolean;
-  lookingForAJobDescription: string;
-  fullName: string;
+  userId: number | null;
+  lookingForAJob: boolean | null;
+  lookingForAJobDescription: string | null;
+  fullName: string | null;
   contacts: {
-    facebook: string;
-    website: string;
-    vk: string;
-    twitter: string;
-    instagram: string;
-    youtube: string;
-    github: string;
-    mainLink: string;
+    facebook: string | null;
+    website: string | null;
+    vk: string | null;
+    twitter: string | null;
+    instagram: string | null;
+    youtube: string | null;
+    github: string | null;
+    mainLink: string | null;
   };
-  aboutMe: string;
-  // photos: {
-  //   small: string;
-  //   large: string;
-  // };
+  aboutMe: string | null;
+  photos?: Photos;
 };
 
 // FINDUSERS
