@@ -1,9 +1,13 @@
-// import ButtonUI from "../../../../../UIComponents/ButtonUI/ButtonUI";
+import { FC } from "react";
 import nullava from "../../../../../../assets/images/nullAva.jpg";
 import styles from "./avatar.module.scss";
 
-const NewPhoto = (props) => {
-  const handlePhoto = (e) => {
+type NewPhotoProps = {
+  updatePhoto: (photoFiles: any) => void;
+};
+
+const NewPhoto: FC<NewPhotoProps> = (props) => {
+  const handlePhoto = (e: any) => {
     e.target.files.length && props.updatePhoto(e.target.files);
   };
   return (
@@ -14,12 +18,18 @@ const NewPhoto = (props) => {
   );
 };
 
-const Avatar = (props) => {
-  const { photo, fullname, isOwner } = props;
+type AvatarProps = {
+  photo: string;
+  fullname: string;
+  isOwner: boolean;
+  updatePhoto: (photoFiles: any) => void;
+};
+
+const Avatar: FC<AvatarProps> = ({ photo, fullname, isOwner, updatePhoto }) => {
   return (
     <div className={styles.avatar}>
       <img src={photo === null ? nullava : photo} alt={fullname} />
-      {isOwner && <NewPhoto updatePhoto={props.updatePhoto} />}
+      {isOwner && <NewPhoto updatePhoto={updatePhoto} />}
     </div>
   );
 };

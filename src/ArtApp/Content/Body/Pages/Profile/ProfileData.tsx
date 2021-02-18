@@ -1,13 +1,30 @@
+import { FC } from "react";
 import Status from "./Status/Status";
 import ButtonUI from "../../../../UIComponents/ButtonUI/ButtonUI";
 import Avatar from "./Avatar/Avatar";
 
 import styles from "./profile.module.scss";
+// import { UserData } from "../../../../../Types/Types";
 
-const ProfileData = ({ user, ...props }) => {
-  // console.log(user);
+type Props = {
+  user: any;
+  isOwner: boolean;
+  status: string;
+  icons: any;
+  updatePhoto: (photoFiles: any) => void;
+  updateMyStatus: (status: string) => void;
+  editMode: () => void;
+};
 
-  const socials = Object.keys(user.contacts).map((el) => ({
+type Social = {
+  name: string;
+  link: string;
+  ico: any;
+};
+type Socials = Array<Social>;
+
+const ProfileData: FC<Props> = ({ user, ...props }) => {
+  const socials: Socials = Object.keys(user.contacts).map((el) => ({
     name: el,
     link: user.contacts[el],
     ico: props.icons[el],

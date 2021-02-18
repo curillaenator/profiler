@@ -1,4 +1,5 @@
 import { profileAPI } from "../../API/api";
+import { UserData } from "../../Types/Types";
 
 const SET_USER: string = "profileReducer/SET_USER";
 const SET_STATUS: string = "profileReducer/SET_STATUS";
@@ -74,8 +75,8 @@ const updatePhotoSuccess = (photos: Photos): UpdatePhotoSuccess => ({
   photos,
 });
 
-type UpdateUser = { type: typeof UPDATE_USER; user: any };
-export const updateUser = (user: any): UpdateUser => ({
+type UpdateUser = { type: typeof UPDATE_USER; user: UserData };
+export const updateUser = (user: UserData): UpdateUser => ({
   type: UPDATE_USER,
   user,
 });
@@ -104,7 +105,6 @@ export const updateMyStatus = (status: string) => (dispatch: any) => {
     .setMyStatus(status)
     .then((resp: any) => resp.resultCode === 0 && dispatch(setStatus(status)));
 };
-
 
 export const updatePhoto = (photoFiles: any) => async (dispatch: any) => {
   const resp = await profileAPI.updatePhoto(photoFiles[0]);

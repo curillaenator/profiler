@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -7,7 +7,8 @@ import Profile from "./Profile";
 import * as profileSel from "../../../../../Redux/Selectors/profileSelector";
 import * as uiSel from "../../../../../Redux/Selectors/uiSelector";
 import * as authSel from "../../../../../Redux/Selectors/authSelector";
-
+import { AppStateType } from "../../../../../Redux/store";
+import { UserData } from "../../../../../Types/Types";
 import {
   requestProfile,
   requestStatus,
@@ -16,9 +17,27 @@ import {
   updateProfile,
 } from "../../../../../Redux/Reducers/profileReducer";
 
-const ProfileAJAX = (props) => {
+type MsProps = {
+  ownerId: number;
+  user: any;
+  status: string;
+  pictureHeight: number;
+  icons: any;
+};
+type MdProps = {
+  match:any,
+  requestProfile: (userId:number) => void;
+  requestStatus: (userId:number) => void;
+  updateMyStatus: (status: string) => void;
+  updatePhoto: (photoFiles: any) => void;
+  updateProfile: (newUserData: UserData) => void;
+};
+
+type Props = MsProps & MdProps;
+
+const ProfileAJAX: FC<Props> = (props) => {
   const { requestProfile, requestStatus, ...dimedProps } = props;
-  const userId = !props.match.params.userId
+  const userId: number = !props.match.params.userId
     ? props.ownerId
     : props.match.params.userId;
 
@@ -30,7 +49,7 @@ const ProfileAJAX = (props) => {
   return <Profile {...dimedProps} />;
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
   ownerId: authSel.getAuthId(state),
   user: profileSel.getUser(state),
   status: profileSel.getStatus(state),
