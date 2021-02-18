@@ -1,11 +1,22 @@
+import { FC } from "react";
 import { NavLink } from "react-router-dom";
 
 import ButtonUI from "../../../../UIComponents/ButtonUI/ButtonUI";
 import styles from "./findusers.module.scss";
 import nullAva from "../../../../../assets/images/nullAva.jpg";
 
-const Usercard = (props) => {
-  // console.log(props);
+import { SingleUser } from "../../../../../Types/Types";
+
+type Props = {
+  user: SingleUser;
+  icons: any;
+  follower: (id: number) => void;
+  unfollower: (id: number) => void;
+  whileFollow: Array<number>;
+};
+
+const Usercard: FC<Props> = (props) => {
+  console.log(props);
 
   const followHandler = () =>
     props.user.followed
@@ -32,7 +43,7 @@ const Usercard = (props) => {
               title="отписка"
               type={"secondary"}
               handler={followHandler}
-              fontsize={'10px'}
+              fontsize={"10px"}
             />
           ) : (
             <ButtonUI
@@ -40,7 +51,7 @@ const Usercard = (props) => {
               title="в друзья"
               type={"primary"}
               handler={followHandler}
-              fontsize={'10px'}
+              fontsize={"10px"}
             />
           )}
         </div>
