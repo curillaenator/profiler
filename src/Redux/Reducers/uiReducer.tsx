@@ -1,4 +1,14 @@
-const initialState = {
+import { MenuParams, MenuButtons } from "../../Types/Types";
+
+const MENU_HEGHT = "uiReducer/MENU_HEGHT";
+
+type InitialState = {
+  menuButtons: MenuButtons;
+  menuParams: MenuParams;
+  icons: any;
+};
+
+const initialState: InitialState = {
   menuButtons: {
     profile: "профиль",
     skills: "навыки",
@@ -6,7 +16,7 @@ const initialState = {
     dialogs: "общение",
   },
   menuParams: {
-    height: "",
+    height: 0,
   },
   icons: {
     search: (
@@ -134,9 +144,9 @@ const initialState = {
   },
 };
 
-export const uiReducer = (state = initialState, action) => {
+export const uiReducer = (state = initialState, action: any): InitialState => {
   switch (action.type) {
-    case "MENU-HEIGHT":
+    case MENU_HEGHT:
       return {
         ...state,
         menuParams: { ...state.menuParams, height: action.height },
@@ -148,4 +158,18 @@ export const uiReducer = (state = initialState, action) => {
   return state;
 };
 
-export const menuHeight = (height) => ({ type: "MENU-HEIGHT", height });
+// ACTIONs
+
+type MenuHeight = { type: typeof MENU_HEGHT; height: number };
+const menuHeight = (height: number): MenuHeight => ({
+  type: MENU_HEGHT,
+  height,
+});
+
+//THUNKs
+
+export const setMenuHeight = () => (dispatch: any) => {
+  const btnsQty = Object.keys(initialState.menuButtons).length;
+  const heightCalced = btnsQty * 40 + 16 * (btnsQty - 1);
+  dispatch(menuHeight(heightCalced));
+};

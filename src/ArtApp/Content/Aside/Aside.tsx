@@ -1,4 +1,4 @@
-import MenuCont from "./Menu/MenuCont";
+import { MenuCont } from "./Menu/MenuCont";
 
 import styles from "./aside.module.scss";
 

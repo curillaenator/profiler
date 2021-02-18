@@ -1,7 +1,13 @@
-import React, { useState, useEffect } from "react";
+import { FC, useState, useEffect, ChangeEvent } from "react";
 import styles from "./status.module.scss";
 
-const Status = (props) => {
+type Props = {
+  status: string;
+  updateMyStatus: (status: string) => void;
+  isOwner: boolean;
+};
+
+const Status: FC<Props> = (props) => {
   const [editMode, setEditMode] = useState(false);
   const [status, setStatus] = useState(props.status);
 
@@ -10,7 +16,7 @@ const Status = (props) => {
     setEditMode(false);
     props.updateMyStatus(status); //Обновление статуса через PUT
   };
-  const onStatusChange = (e) => setStatus(e.target.value);
+  const onStatusChange = (event: ChangeEvent<HTMLInputElement>) => setStatus(event.target.value);
 
   useEffect(() => setStatus(props.status), [props.status]);
 

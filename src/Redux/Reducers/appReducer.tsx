@@ -1,4 +1,5 @@
 import { getUserInfo } from "./authReducer";
+import { setMenuHeight } from "./uiReducer";
 
 const INITIALIZE: string = "appReducer/INITIALIZE";
 
@@ -35,5 +36,8 @@ const initializeSuccess = (): InitializeSuccess => ({ type: INITIALIZE });
 export const initializeApp = () => (dispatch: any) => {
   const getUserInfoPromise = dispatch(getUserInfo());
   const allPromises = [getUserInfoPromise];
-  Promise.all(allPromises).then(() => dispatch(initializeSuccess()));
+  Promise.all(allPromises).then(() => {
+    dispatch(setMenuHeight())
+    dispatch(initializeSuccess());
+  });
 };
